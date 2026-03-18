@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="img/logo-white.png">
+<title>YSL LOVENUDE Matchmaker</title>
+<style>
+/* ═══════════════ FONTS ═══════════════ */
+@font-face{font-family:'BlackDiamond';src:url('fonts/BlackDiamond.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Singulier';src:url('fonts/Singulier-Light.otf') format('opentype');font-weight:300;font-display:swap}
+@font-face{font-family:'Singulier';src:url('fonts/Singulier-Regular.otf') format('opentype');font-weight:400;font-display:swap}
+@font-face{font-family:'Singulier';src:url('fonts/Singulier-Bold.otf') format('opentype');font-weight:700;font-display:swap}
+
+/* ═══════════════ RESET & BASE ═══════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#0a0a0a;color:#fff;font-family:'Singulier',Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ═══════════════ CSS VARIABLES ═══════════════ */
+:root{
+  --rose:#C4867A;
+  --rose-dark:#9B6459;
+  --rose-light:#E8B4AA;
+  --gold:#D4AF6F;
+  --black:#0a0a0a;
+  --white:#F5F0EB;
+}
+
+/* ═══════════════ APP SHELL ═══════════════ */
+#app{position:relative;width:100%;height:100%;overflow:hidden}
+
+/* ═══════════════ SCREENS ═══════════════ */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1);
+  transform:translateY(20px);
+  will-change:opacity,transform;
+}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.exit{opacity:0;transform:translateY(-20px);pointer-events:none}
+
+/* ═══════════════ SPLASH SCREEN ═══════════════ */
+#splash{
+  background:var(--black);
+  overflow:hidden;
+}
+#splash::before{
+  content:'';position:absolute;inset:0;
+  background:url('img/bg/visuel-dua-lovenude.jpg') center/cover no-repeat;
+  opacity:.35;
+  animation:slowZoom 20s ease-in-out infinite alternate;
+}
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+
+/* Smoke overlay */
+.smoke{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 30% 80%,rgba(196,134,122,.25) 0%,transparent 60%),
+    radial-gradient(ellipse at 70% 20%,rgba(196,134,122,.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.4) 0%,transparent 80%);
+  animation:smokeShift 12s ease-in-out infinite alternate;
+}
+@keyframes smokeShift{
+  0%{opacity:.8;transform:scale(1) translateY(0)}
+  100%{opacity:1;transform:scale(1.05) translateY(-10px)}
+}
+
+/* Mist particles */
+.mist{
+  position:absolute;width:200%;height:100%;left:-50%;top:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.77 0 0 0 0 0.52 0 0 0 0 0.48 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") center/cover;
+  opacity:.6;
+  animation:mistDrift 25s linear infinite;
+  pointer-events:none;
+}
+@keyframes mistDrift{from{transform:translateX(0)}to{transform:translateX(25%)}}
+
+.splash-content{position:relative;z-index:2;text-align:center;padding:2rem}
+.splash-logo{width:80px;height:auto;margin:0 auto 2rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
+.splash-title{
+  font-family:'BlackDiamond',cursive;
+  font-size:clamp(3rem,12vw,6rem);
+  letter-spacing:.08em;
+  line-height:.9;
+  color:var(--white);
+  opacity:0;animation:fadeUp 1s .6s ease forwards;
+  text-shadow:0 0 60px rgba(196,134,122,.4);
+}
+.splash-subtitle{
+  font-size:clamp(.75rem,2.5vw,1rem);
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--rose-light);
+  margin-top:1.2rem;
+  opacity:0;animation:fadeUp 1s .9s ease forwards;
+}
+.btn-start{
+  margin-top:3rem;
+  padding:1rem 3rem;
+  border:1px solid rgba(196,134,122,.5);
+  font-family:'Singulier',serif;
+  font-size:.85rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--white);
+  background:rgba(196,134,122,.12);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:all .4s ease;
+  opacity:0;animation:fadeUp 1s 1.2s ease forwards;
+}
+.btn-start:hover,.btn-start:active{
+  background:rgba(196,134,122,.3);
+  border-color:var(--rose);
+  box-shadow:0 0 30px rgba(196,134,122,.2);
+}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(20px)}}
+
+/* ═══════════════ QUESTION SCREENS ═══════════════ */
+.q-screen{
+  background:var(--black);
+  padding:2rem;
+}
+.q-screen::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(196,134,122,.12) 0%,transparent 70%);
+}
+.q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px}
+
+.q-logo{width:48px;margin:0 auto 2.5rem;opacity:.7}
+.q-label{
+  font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:.8rem;
+}
+.q-title{
+  font-family:'BlackDiamond',cursive;
+  font-size:clamp(2rem,8vw,3.5rem);
+  color:var(--white);
+  margin-bottom:2.5rem;
+  line-height:1;
+}
+
+/* Match / Clash buttons */
+.choice-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.choice-btn{
+  flex:1;min-width:140px;max-width:180px;
+  padding:2.5rem 1rem;
+  border:1px solid rgba(196,134,122,.3);
+  background:rgba(196,134,122,.06);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  text-align:center;
+  transition:all .5s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+}
+.choice-btn::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(196,134,122,.15),transparent 70%);
+  opacity:0;transition:opacity .5s;
+}
+.choice-btn:hover::after,.choice-btn:active::after{opacity:1}
+.choice-btn:hover,.choice-btn:active{
+  border-color:var(--rose);
+  transform:scale(1.03);
+  box-shadow:0 0 40px rgba(196,134,122,.15);
+}
+.choice-btn .icon{font-size:2rem;margin-bottom:.8rem;display:block}
+.choice-btn .label{
+  font-family:'BlackDiamond',cursive;
+  font-size:1.8rem;
+  display:block;
+  letter-spacing:.05em;
+}
+.choice-btn .desc{
+  font-size:.65rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  margin-top:.5rem;
+  display:block;
+}
+
+/* Skin tone buttons */
+.tone-row{display:flex;flex-direction:column;gap:.8rem;width:100%}
+.tone-btn{
+  padding:1.4rem 2rem;
+  border:1px solid rgba(196,134,122,.25);
+  background:rgba(196,134,122,.05);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;gap:1.2rem;
+  transition:all .4s ease;
+}
+.tone-btn:hover,.tone-btn:active{
+  border-color:var(--rose);
+  background:rgba(196,134,122,.15);
+}
+.tone-dot{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.15);
+}
+.tone-dot.clair{background:linear-gradient(135deg,#F5D6C3,#E8C4B0)}
+.tone-dot.medium{background:linear-gradient(135deg,#C69C7B,#B08968)}
+.tone-dot.fonce{background:linear-gradient(135deg,#7B5B4C,#5C3D2E)}
+.tone-label{
+  font-size:1rem;letter-spacing:.2em;text-transform:uppercase;
+}
+
+/* ═══════════════ RESULTS SCREEN ═══════════════ */
+#results{
+  background:var(--black);
+  justify-content:flex-start;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.results-header{
+  width:100%;text-align:center;padding:2rem 1.5rem 1rem;
+  position:relative;z-index:2;
+}
+.results-header .q-logo{margin-bottom:1rem}
+.results-badge{
+  display:inline-block;
+  padding:.4rem 1.5rem;
+  border:1px solid var(--rose);
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--rose-light);
+  margin-bottom:.5rem;
+}
+.results-title{
+  font-family:'BlackDiamond',cursive;
+  font-size:clamp(1.6rem,6vw,2.5rem);
+  color:var(--white);
+  margin-top:.5rem;
+}
+.results-sub{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:.3rem;
+}
+
+/* Combo cards */
+.combos-grid{
+  width:100%;max-width:500px;
+  padding:1rem 1.5rem 2rem;
+  display:flex;flex-direction:column;gap:1.2rem;
+}
+.combo-card{
+  border:1px solid rgba(196,134,122,.2);
+  background:rgba(196,134,122,.04);
+  overflow:hidden;
+  transition:all .5s ease;
+  cursor:pointer;
+  opacity:0;animation:cardReveal .7s ease forwards;
+}
+.combo-card:nth-child(2){animation-delay:.2s}
+@keyframes cardReveal{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(30px)}}
+
+.combo-card:active{transform:scale(.98);border-color:var(--rose)}
+
+.combo-model{
+  width:100%;aspect-ratio:16/10;object-fit:cover;
+  filter:brightness(.9) contrast(1.05);
+}
+.combo-info{padding:1.2rem 1rem}
+.combo-label{
+  font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:.8rem;
+}
+.combo-products{display:flex;gap:.8rem;align-items:center}
+.combo-product{display:flex;align-items:center;gap:.6rem;flex:1}
+.combo-swatch{
+  width:40px;height:40px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,.1);
+  flex-shrink:0;
+}
+.combo-product-info{min-width:0}
+.combo-product-type{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.combo-product-name{font-size:.72rem;color:var(--white);margin-top:.1rem;line-height:1.2}
+.combo-plus{
+  color:var(--rose);font-size:1.2rem;font-weight:300;flex-shrink:0;
+  opacity:.5;
+}
+
+/* ═══════════════ DETAIL OVERLAY ═══════════════ */
+#detail{
+  background:rgba(10,10,10,.97);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  justify-content:flex-start;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  z-index:100;
+}
+.detail-close{
+  position:fixed;top:1rem;right:1rem;z-index:110;
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;color:var(--white);
+  background:rgba(196,134,122,.15);
+  border:1px solid rgba(196,134,122,.3);
+  border-radius:50%;
+  transition:all .3s;
+}
+.detail-close:active{background:rgba(196,134,122,.3)}
+
+.detail-model{
+  width:100%;aspect-ratio:3/2;object-fit:cover;
+  filter:brightness(.85) contrast(1.05);
+}
+.detail-content{padding:2rem 1.5rem 3rem;text-align:center;width:100%;max-width:500px;margin:0 auto}
+.detail-badge{
+  display:inline-block;padding:.3rem 1.2rem;
+  border:1px solid var(--rose);
+  font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--rose-light);margin-bottom:1.5rem;
+}
+.detail-product{
+  margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .6s ease forwards;
+}
+.detail-product:nth-child(3){animation-delay:.15s}
+.detail-product-type{
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:.8rem;
+}
+.detail-product-img{
+  width:180px;height:180px;border-radius:50%;
+  object-fit:cover;margin:0 auto .8rem;
+  border:2px solid rgba(196,134,122,.2);
+  box-shadow:0 0 40px rgba(196,134,122,.1);
+}
+.detail-product-shade{
+  font-family:'BlackDiamond',cursive;
+  font-size:1.8rem;color:var(--white);
+}
+.detail-product-desc{
+  font-size:.7rem;letter-spacing:.15em;
+  color:rgba(255,255,255,.5);margin-top:.2rem;
+}
+
+/* Restart button */
+.btn-restart{
+  margin-top:1rem;
+  padding:.8rem 2.5rem;
+  border:1px solid rgba(196,134,122,.4);
+  font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--white);
+  background:rgba(196,134,122,.1);
+  transition:all .4s;
+}
+.btn-restart:active{background:rgba(196,134,122,.25);border-color:var(--rose)}
+
+/* ═══════════════ YSL FOOTER ═══════════════ */
+.ysl-footer{
+  padding:1.5rem;text-align:center;
+  opacity:.3;
+}
+.ysl-footer img{width:100px;margin:0 auto}
+
+/* ═══════════════ UTILITIES ═══════════════ */
+.divider{
+  width:40px;height:1px;background:var(--rose);opacity:.4;
+  margin:0 auto;
+}
+
+/* ═══════════════ LOADING SHIMMER ═══════════════ */
+.shimmer{
+  position:absolute;inset:0;z-index:9999;
+  background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease;
+}
+.shimmer.hide{opacity:0;pointer-events:none}
+.shimmer-logo{width:60px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:0;background:transparent}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="shimmer" id="loader">
+  <img src="img/logo-white.png" alt="YSL" class="shimmer-logo">
+</div>
+
+<div id="app">
+
+  <!-- ═══ SPLASH ═══ -->
+  <div class="screen active" id="splash">
+    <div class="smoke"></div>
+    <div class="mist"></div>
+    <div class="splash-content">
+      <img src="img/logo-white.png" alt="YSL" class="splash-logo">
+      <h1 class="splash-title">Lovenude</h1>
+      <p class="splash-subtitle">Trouvez votre combo lèvres</p>
+      <button class="btn-start" onclick="goTo('q1')">Commencer</button>
+    </div>
+  </div>
+
+  <!-- ═══ Q1: MATCH ou CLASH ═══ -->
+  <div class="screen" id="q1">
+    <div class="q-content">
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <p class="q-label">Étape 1</p>
+      <h2 class="q-title">Match ou Clash ?</h2>
+      <div class="choice-row">
+        <button class="choice-btn" onclick="setChoice('match')">
+          <span class="icon">✦</span>
+          <span class="label">Match</span>
+          <span class="desc">Tons harmonieux</span>
+        </button>
+        <button class="choice-btn" onclick="setChoice('clash')">
+          <span class="icon">✧</span>
+          <span class="label">Clash</span>
+          <span class="desc">Tons contrastés</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Q2: SKIN TONE ═══ -->
+  <div class="screen" id="q2">
+    <div class="q-content">
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <p class="q-label">Étape 2</p>
+      <h2 class="q-title">Carnation</h2>
+      <div class="tone-row">
+        <button class="tone-btn" onclick="setTone('clair')">
+          <div class="tone-dot clair"></div>
+          <span class="tone-label">Clair</span>
+        </button>
+        <button class="tone-btn" onclick="setTone('medium')">
+          <div class="tone-dot medium"></div>
+          <span class="tone-label">Medium</span>
+        </button>
+        <button class="tone-btn" onclick="setTone('fonce')">
+          <div class="tone-dot fonce"></div>
+          <span class="tone-label">Foncé</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESULTS ═══ -->
+  <div class="screen" id="results">
+    <div class="results-header">
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <div class="results-badge" id="resultsBadge"></div>
+      <h2 class="results-title" id="resultsTitle">Vos Combos</h2>
+      <p class="results-sub" id="resultsSub"></p>
+    </div>
+    <div class="combos-grid" id="combosGrid"></div>
+    <button class="btn-restart" onclick="restart()">Recommencer</button>
+    <div class="ysl-footer"><img src="img/ysl-beaute-white.png" alt="YSL Beauté"></div>
+  </div>
+
+  <!-- ═══ DETAIL OVERLAY ═══ -->
+  <div class="screen" id="detail">
+    <button class="detail-close" onclick="closeDetail()">×</button>
+    <img class="detail-model" id="detailModel" src="" alt="">
+    <div class="detail-content" id="detailContent"></div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════ DATA ═══════════════
+const COMBOS = {
+  match: {
+    clair: [
+      { model:'img/combo/page-1.jpg', lip:{id:'06',name:'Naughty Pink'}, liner:{id:'104',name:'Brûlant Mauve'} },
+      { model:'img/combo/page-1.jpg', lip:{id:'01',name:'Undressed Pink'}, liner:{id:'102',name:'Hâle Lignes'} }
+    ],
+    medium: [
+      { model:'img/combo/page-2.jpg', lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'44',name:'Nude Lavallière'} },
+      { model:'img/combo/page-2.jpg', lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'104',name:'Brûlant Mauve'} }
+    ],
+    fonce: [
+      { model:'img/combo/page-3.jpg', lip:{id:'09',name:'3AM Espresso'}, liner:{id:'107',name:'Cacao Flirt'} },
+      { model:'img/combo/page-3.jpg', lip:{id:'08',name:'Mauve-Haze'}, liner:{id:'107',name:'Cacao Flirt'} }
+    ]
+  },
+  clash: {
+    clair: [
+      { model:'img/combo/page-1.jpg', lip:{id:'03',name:'Taupe Flirt'}, liner:{id:'105',name:'Brûlé Miel'} },
+      { model:'img/combo/page-1.jpg', lip:{id:'04',name:'Rouge Flagrant'}, liner:{id:'105',name:'Brûlé Miel'} }
+    ],
+    medium: [
+      { model:'img/combo/page-2.jpg', lip:{id:'05',name:'Apple Sin'}, liner:{id:'108',name:'Hazel Enigma'} },
+      { model:'img/combo/page-2.jpg', lip:{id:'07',name:'Illilit Nude'}, liner:{id:'01',name:'Déshabillé Rose'} }
+    ],
+    fonce: [
+      { model:'img/combo/page-3.jpg', lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'106',name:'Épicé Fumé'} },
+      { model:'img/combo/page-3.jpg', lip:{id:'09',name:'3AM Espresso'}, liner:{id:'110',name:'Expresso Dreams'} }
+    ]
+  }
+};
+
+const TONE_LABELS = { clair:'Clair', medium:'Medium', fonce:'Foncé' };
+
+let choice = '', tone = '', currentScreen = 'splash';
+
+// ═══════════════ NAVIGATION ═══════════════
+function goTo(id) {
+  const prev = document.getElementById(currentScreen);
+  const next = document.getElementById(id);
+  prev.classList.remove('active');
+  prev.classList.add('exit');
+  setTimeout(() => prev.classList.remove('exit'), 800);
+  next.classList.add('active');
+  currentScreen = id;
+  if (id === 'results') next.scrollTop = 0;
+}
+
+function setChoice(c) {
+  choice = c;
+  goTo('q2');
+}
+
+function setTone(t) {
+  tone = t;
+  showResults();
+}
+
+function showResults() {
+  const combos = COMBOS[choice][tone];
+  const badge = document.getElementById('resultsBadge');
+  const sub = document.getElementById('resultsSub');
+  const grid = document.getElementById('combosGrid');
+  
+  badge.textContent = choice === 'match' ? '✦ Match' : '✧ Clash';
+  sub.textContent = `Carnation ${TONE_LABELS[tone]}`;
+  
+  grid.innerHTML = combos.map((c, i) => `
+    <div class="combo-card" onclick="openDetail(${i})" style="animation-delay:${i*.2}s">
+      <img class="combo-model" src="${c.model}" alt="Combo ${i+1}">
+      <div class="combo-info">
+        <div class="combo-label">Combo ${i+1}</div>
+        <div class="combo-products">
+          <div class="combo-product">
+            <img class="combo-swatch" src="img/lipstick/${c.lip.id}.jpg" alt="">
+            <div class="combo-product-info">
+              <div class="combo-product-type">Lip Blusher</div>
+              <div class="combo-product-name">#${c.lip.id} ${c.lip.name}</div>
+            </div>
+          </div>
+          <span class="combo-plus">+</span>
+          <div class="combo-product">
+            <img class="combo-swatch" src="img/liner/${c.liner.id}.jpg" alt="">
+            <div class="combo-product-info">
+              <div class="combo-product-type">Kiss Shaper</div>
+              <div class="combo-product-name">#${c.liner.id} ${c.liner.name}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  goTo('results');
+}
+
+function openDetail(idx) {
+  const combo = COMBOS[choice][tone][idx];
+  document.getElementById('detailModel').src = combo.model;
+  
+  const hasPackshot = id => ['01','02','04','05','06','07','08','09','44'].includes(id);
+  
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-badge">${choice === 'match' ? '✦ Match' : '✧ Clash'} · Combo ${idx+1}</div>
+    
+    <div class="detail-product">
+      <div class="detail-product-type">Lip Blusher</div>
+      ${hasPackshot(combo.lip.id) 
+        ? `<img class="detail-product-img" src="img/packshot/lipstick-${combo.lip.id}.jpg" alt="">`
+        : `<img class="detail-product-img" src="img/lipstick/${combo.lip.id}.jpg" alt="">`}
+      <div class="detail-product-shade">#${combo.lip.id}</div>
+      <div class="detail-product-desc">${combo.lip.name}</div>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div class="detail-product" style="animation-delay:.15s">
+      <div class="detail-product-type">Kiss Shaper</div>
+      <img class="detail-product-img" src="img/liner/${combo.liner.id}.jpg" alt="">
+      <div class="detail-product-shade">#${combo.liner.id}</div>
+      <div class="detail-product-desc">${combo.liner.name}</div>
+    </div>
+  `;
+  
+  const detail = document.getElementById('detail');
+  detail.classList.add('active');
+  detail.scrollTop = 0;
+}
+
+function closeDetail() {
+  document.getElementById('detail').classList.remove('active');
+}
+
+function restart() {
+  choice = '';
+  tone = '';
+  closeDetail();
+  goTo('splash');
+}
+
+// ═══════════════ INIT ═══════════════
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hide'), 800);
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+});
+</script>
+</body>
+</html>
