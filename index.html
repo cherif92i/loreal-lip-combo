@@ -266,10 +266,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .combo-card:active{transform:scale(.98);border-color:var(--rose)}
 
-.combo-model{
-  width:100%;aspect-ratio:16/10;object-fit:cover;
-  filter:brightness(.9) contrast(1.05);
+/* Texture duo header */
+.combo-textures{
+  display:flex;width:100%;aspect-ratio:2/1;overflow:hidden;position:relative;
 }
+.combo-textures::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(10,10,10,.8) 100%);
+  pointer-events:none;
+}
+.combo-tex{flex:1;object-fit:cover;filter:brightness(.9) contrast(1.1) saturate(1.1)}
+.combo-tex:first-child{border-right:1px solid rgba(0,0,0,.3)}
+.combo-tex-labels{
+  position:absolute;bottom:0;left:0;right:0;z-index:1;
+  display:flex;padding:.6rem 1rem;
+}
+.combo-tex-label{
+  flex:1;font-size:.4rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+}
+.combo-tex-label:last-child{text-align:right}
 .combo-info{padding:1.2rem 1rem}
 .combo-label{
   font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
@@ -314,8 +330,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .detail-close:active{background:rgba(196,134,122,.3)}
 
 .detail-model{
-  width:100%;aspect-ratio:3/2;object-fit:cover;
-  filter:brightness(.85) contrast(1.05);
+  width:100%;aspect-ratio:1/1;object-fit:cover;
+  filter:brightness(.9) contrast(1.1) saturate(1.1);
+  max-height:40vh;
 }
 .detail-content{padding:2rem 1.5rem 3rem;text-align:center;width:100%;max-width:500px;margin:0 auto}
 .detail-badge{
@@ -545,7 +562,14 @@ function showResults() {
   
   grid.innerHTML = combos.map((c, i) => `
     <div class="combo-card" onclick="openDetail(${i})" style="animation-delay:${i*.2}s">
-      <img class="combo-model" src="${c.model}" alt="Combo ${i+1}">
+      <div class="combo-textures">
+        <img class="combo-tex" src="img/texture-lip/${c.lip.id}.jpg" alt="">
+        <img class="combo-tex" src="img/liner/${c.liner.id}.jpg" alt="">
+        <div class="combo-tex-labels">
+          <span class="combo-tex-label">Lip Blusher</span>
+          <span class="combo-tex-label">Kiss Shaper</span>
+        </div>
+      </div>
       <div class="combo-info">
         <div class="combo-label">Combo ${i+1}</div>
         <div class="combo-products">
@@ -574,7 +598,7 @@ function showResults() {
 
 function openDetail(idx) {
   const combo = COMBOS[choice][tone][idx];
-  document.getElementById('detailModel').src = combo.model;
+  document.getElementById('detailModel').src = `img/texture-lip/${combo.lip.id}.jpg`;
   
   const hasPackshot = id => ['01','02','04','05','06','07','08','09','44'].includes(id);
   

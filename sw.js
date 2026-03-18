@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ysl-lovenude-v1';
+const CACHE_NAME = 'ysl-lovenude-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -46,7 +46,17 @@ const ASSETS = [
   './img/packshot/lipstick-07.jpg',
   './img/packshot/lipstick-08.jpg',
   './img/packshot/lipstick-09.jpg',
-  './img/packshot/lipstick-44.jpg'
+  './img/packshot/lipstick-44.jpg',
+  './img/texture-lip/01.jpg',
+  './img/texture-lip/02.jpg',
+  './img/texture-lip/03.jpg',
+  './img/texture-lip/04.jpg',
+  './img/texture-lip/05.jpg',
+  './img/texture-lip/06.jpg',
+  './img/texture-lip/07.jpg',
+  './img/texture-lip/08.jpg',
+  './img/texture-lip/09.jpg',
+  './img/texture-lip/44.jpg'
 ];
 
 self.addEventListener('install', e => {
