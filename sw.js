@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ysl-lovenude-v4';
+const CACHE_NAME = 'ysl-lovenude-v5';
 const ASSETS = [
   './',
   './index.html',
