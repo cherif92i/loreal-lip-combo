@@ -12,6 +12,7 @@
 <style>
 /* ═══════════════ FONTS ═══════════════ */
 @font-face{font-family:'BlackDiamond';src:url('fonts/BlackDiamond.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'SingulierHeavy';src:url('fonts/Singulier-Heavy.otf') format('opentype');font-display:swap}
 @font-face{font-family:'Singulier';src:url('fonts/Singulier-Light.otf') format('opentype');font-weight:300;font-display:swap}
 @font-face{font-family:'Singulier';src:url('fonts/Singulier-Regular.otf') format('opentype');font-weight:400;font-display:swap}
 @font-face{font-family:'Singulier';src:url('fonts/Singulier-Bold.otf') format('opentype');font-weight:700;font-display:swap}
@@ -85,9 +86,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes mistDrift{from{transform:translateX(0)}to{transform:translateX(25%)}}
 
 .splash-content{position:relative;z-index:2;text-align:center;padding:2rem}
-.splash-logo{width:80px;height:auto;margin:0 auto 2rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
+.splash-logo{width:160px;height:auto;margin:0 auto 1rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
 .splash-title{
-  font-family:'BlackDiamond',cursive;
+  font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(3rem,12vw,6rem);
   letter-spacing:.08em;
   line-height:.9;
@@ -137,13 +138,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px}
 
-.q-logo{width:48px;margin:0 auto 2.5rem;opacity:.7}
+.q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
 }
 .q-title{
-  font-family:'BlackDiamond',cursive;
+  font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(2rem,8vw,3.5rem);
   color:var(--white);
   margin-bottom:2.5rem;
@@ -176,7 +177,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .choice-btn .icon{font-size:2rem;margin-bottom:.8rem;display:block}
 .choice-btn .label{
-  font-family:'BlackDiamond',cursive;
+  font-family:'SingulierHeavy',sans-serif;
   font-size:1.8rem;
   display:block;
   letter-spacing:.05em;
@@ -237,7 +238,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   margin-bottom:.5rem;
 }
 .results-title{
-  font-family:'BlackDiamond',cursive;
+  font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(1.6rem,6vw,2.5rem);
   color:var(--white);
   margin-top:.5rem;
@@ -339,7 +340,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   box-shadow:0 0 40px rgba(196,134,122,.1);
 }
 .detail-product-shade{
-  font-family:'BlackDiamond',cursive;
+  font-family:'SingulierHeavy',sans-serif;
   font-size:1.8rem;color:var(--white);
 }
 .detail-product-desc{
@@ -383,6 +384,68 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .shimmer-logo{width:60px;animation:pulse 1.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
+/* ═══════════════ APP NAME ═══════════════ */
+.app-name{
+  font-family:'Singulier',sans-serif;
+  font-weight:400;
+  font-size:.65rem;
+  letter-spacing:.45em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.2rem;
+  opacity:.8;
+}
+
+/* ═══════════════ SPIN WHEEL ═══════════════ */
+#wheelScreen{
+  background:var(--black);
+  z-index:50;
+}
+#wheelScreen::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(212,175,111,.08) 0%,transparent 70%);
+}
+.wheel-content{position:relative;z-index:2;text-align:center}
+.wheel-title{
+  font-family:'SingulierHeavy',sans-serif;
+  font-size:clamp(1.4rem,5vw,2rem);
+  color:var(--white);
+  margin-bottom:2rem;
+  opacity:0;
+  animation:fadeUp .6s ease forwards;
+}
+.wheel-container{
+  position:relative;
+  width:280px;height:280px;
+  margin:0 auto;
+}
+.wheel-canvas{
+  width:100%;height:100%;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  box-shadow:0 0 60px rgba(212,175,111,.2),inset 0 0 30px rgba(0,0,0,.5);
+}
+.wheel-pointer{
+  position:absolute;
+  top:-18px;left:50%;transform:translateX(-50%);
+  width:0;height:0;
+  border-left:14px solid transparent;
+  border-right:14px solid transparent;
+  border-top:24px solid var(--gold);
+  filter:drop-shadow(0 2px 6px rgba(212,175,111,.5));
+  z-index:3;
+}
+.wheel-center{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:50px;height:50px;border-radius:50%;
+  background:var(--black);
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.5rem;letter-spacing:.2em;color:var(--gold);
+  z-index:3;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar{width:0;background:transparent}
 </style>
@@ -391,7 +454,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 <!-- Loading -->
 <div class="shimmer" id="loader">
-  <img src="img/logo-white.png" alt="YSL" class="shimmer-logo">
+  <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="shimmer-logo" style="width:120px">
 </div>
 
 <div id="app">
@@ -401,9 +464,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="smoke"></div>
     <div class="mist"></div>
     <div class="splash-content">
-      <img src="img/logo-white.png" alt="YSL" class="splash-logo">
+      <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="splash-logo" style="width:160px">
+      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
       <h1 class="splash-title">Lovenude</h1>
-      <p class="splash-subtitle">Trouvez votre combo lèvres</p>
+      <p class="splash-subtitle">Trouve ton combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
     </div>
   </div>
@@ -411,7 +475,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q1: MATCH ou CLASH ═══ -->
   <div class="screen" id="q1">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
+      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">Match ou Clash ?</h2>
       <div class="choice-row">
@@ -432,9 +497,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q2: SKIN TONE ═══ -->
   <div class="screen" id="q2">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
+      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
       <p class="q-label">Étape 2</p>
-      <h2 class="q-title">Carnation</h2>
+      <h2 class="q-title">Ta Carnation</h2>
       <div class="tone-row">
         <button class="tone-btn" onclick="setTone('clair')">
           <div class="tone-dot clair"></div>
@@ -452,12 +518,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     </div>
   </div>
 
+  <!-- ═══ SPIN WHEEL ═══ -->
+  <div class="screen" id="wheelScreen">
+    <div class="wheel-content">
+      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <h2 class="wheel-title">On cherche ton combo...</h2>
+      <div class="wheel-container">
+        <div class="wheel-pointer"></div>
+        <canvas class="wheel-canvas" id="wheelCanvas" width="560" height="560"></canvas>
+        <div class="wheel-center">YSL</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ RESULTS ═══ -->
   <div class="screen" id="results">
     <div class="results-header">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
+      <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
+      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
       <div class="results-badge" id="resultsBadge"></div>
-      <h2 class="results-title" id="resultsTitle">Vos Combos</h2>
+      <h2 class="results-title" id="resultsTitle">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
     </div>
     <div class="combos-grid" id="combosGrid"></div>
@@ -530,7 +610,7 @@ function setChoice(c) {
 
 function setTone(t) {
   tone = t;
-  showResults();
+  spinWheel();
 }
 
 function showResults() {
@@ -613,6 +693,82 @@ function restart() {
   tone = '';
   closeDetail();
   goTo('splash');
+}
+
+// ═══════════════ SPIN WHEEL ═══════════════
+function spinWheel() {
+  goTo('wheelScreen');
+  const canvas = document.getElementById('wheelCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, R = W/2;
+  
+  // Shade names for wheel segments
+  const shades = [
+    {name:'Undressed Pink',color:'#E8B4AA'},
+    {name:'Naughty Pink',color:'#C4867A'},
+    {name:'Taupe Flirt',color:'#9B8579'},
+    {name:'Rouge Flagrant',color:'#B5473A'},
+    {name:'Apple Sin',color:'#A03030'},
+    {name:'Mauve-Haze',color:'#8E6478'},
+    {name:'3AM Espresso',color:'#5C3D2E'},
+    {name:'Nude Lavallière',color:'#C69C7B'},
+    {name:'Illilit Nude',color:'#D4A68A'},
+    {name:'Cacao Flirt',color:'#6B4A3A'},
+  ];
+  const N = shades.length;
+  const arc = (Math.PI*2)/N;
+  
+  function drawWheel(rotation) {
+    ctx.clearRect(0,0,W,H);
+    ctx.save();
+    ctx.translate(R,R);
+    ctx.rotate(rotation);
+    for(let i=0;i<N;i++){
+      const a = i*arc;
+      ctx.beginPath();
+      ctx.moveTo(0,0);
+      ctx.arc(0,0,R-4,a,a+arc);
+      ctx.closePath();
+      ctx.fillStyle = shades[i].color;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,.3)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      // Label
+      ctx.save();
+      ctx.rotate(a+arc/2);
+      ctx.textAlign='right';
+      ctx.fillStyle=i>5?'#F5F0EB':'#1a1a1a';
+      ctx.font='bold 18px Singulier,sans-serif';
+      ctx.fillText(shades[i].name,R-16,6);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+  
+  // Animate spin: fast then decelerate
+  let angle = 0;
+  const totalRotation = Math.PI*2*6 + Math.random()*Math.PI*2; // 6+ full turns
+  const duration = 3000;
+  const start = performance.now();
+  
+  function animate(now) {
+    const elapsed = now - start;
+    const t = Math.min(elapsed/duration, 1);
+    // Ease out cubic
+    const ease = 1 - Math.pow(1-t, 3);
+    angle = totalRotation * ease;
+    drawWheel(angle);
+    if(t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      // Done spinning, show results after brief pause
+      setTimeout(showResults, 600);
+    }
+  }
+  
+  drawWheel(0);
+  setTimeout(() => requestAnimationFrame(animate), 400);
 }
 
 // ═══════════════ INIT ═══════════════
