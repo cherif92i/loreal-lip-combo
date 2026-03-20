@@ -551,7 +551,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   <!-- ═══ DETAIL OVERLAY ═══ -->
   <div class="screen" id="detail">
-    <button class="detail-close" onclick="closeDetail()">×</button>
+    <button class="detail-close" onclick="restart()">×</button>
     <img class="detail-model" id="detailModel" src="" alt="">
     <div class="detail-content" id="detailContent"></div>
   </div>
@@ -692,13 +692,12 @@ function openDetail(idx) {
 
 function closeDetail() {
   document.getElementById('detail').classList.remove('active');
-  restart();
 }
 
 function restart() {
   choice = '';
   tone = '';
-  closeDetail();
+  document.getElementById('detail').classList.remove('active');
   goTo('splash');
 }
 
