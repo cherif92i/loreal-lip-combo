@@ -159,6 +159,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .btn-restart.show{opacity:1;transition-delay:.6s}
 .btn-restart:hover{color:var(--gold)}
 
+/* ===== WHEEL SCREEN ===== */
+.wheel-wrapper{position:relative;width:280px;height:280px;margin:0 auto 2rem}
+.wheel-canvas{width:100%;height:100%;border-radius:50%;position:relative;transition:transform 3s cubic-bezier(.17,.67,.12,.99)}
+.wheel-canvas canvas{width:100%;height:100%;border-radius:50%}
+.wheel-outer-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--gold);pointer-events:none;box-shadow:0 0 30px rgba(201,169,110,.2),inset 0 0 30px rgba(201,169,110,.1)}
+.wheel-pointer{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:10;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:24px solid var(--gold);filter:drop-shadow(0 2px 6px rgba(201,169,110,.5))}
+.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:var(--bg);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 0 20px rgba(0,0,0,.5)}
+.wheel-center span{font-family:var(--display);font-size:.65rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.wheel-label{font-family:var(--display);font-size:clamp(1.2rem,4vw,1.6rem);text-align:center;color:var(--text);opacity:0;transition:opacity .5s var(--ease);margin-bottom:1rem}
+.wheel-label.show{opacity:1}
+.wheel-sublabel{font-family:var(--serif);font-size:.9rem;color:var(--text-dim);text-align:center;font-weight:300;margin-bottom:2rem}
+
 /* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
@@ -173,8 +185,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 </style>
 </head>
 <body>
-<header style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:1.5rem 1rem;background:linear-gradient(to bottom,var(--bg) 60%,transparent)">
-  <img src="img/ysl-beaute-white.png" alt="YSL Beauté" style="width:160px">
+<header style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;flex-direction:column;align-items:center;padding:1.2rem 1rem .8rem;background:linear-gradient(to bottom,var(--bg) 70%,transparent)">
+  <img src="img/ysl-beaute-white.png" alt="YSL Beauté" style="width:140px;margin-bottom:.4rem">
+  <span style="font-family:var(--sans);font-size:.55rem;font-weight:500;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.85">LOVENUDE MATCHMAKER</span>
 </header>
 <div class="progress" id="progress"></div>
 <div id="app">
@@ -244,6 +257,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     </div>
   </div>
 
+  <!-- WHEEL -->
+  <div class="screen" id="s-wheel">
+    <div class="wheel-sublabel">Nous cherchons votre combo idéal…</div>
+    <div class="wheel-wrapper">
+      <div class="wheel-pointer"></div>
+      <div class="wheel-canvas"><canvas id="wheelCanvas" width="560" height="560"></canvas></div>
+      <div class="wheel-outer-ring"></div>
+      <div class="wheel-center"><span>YSL</span></div>
+    </div>
+    <div class="wheel-label" id="wheel-label">Votre combo arrive…</div>
+  </div>
+
   <!-- RESULT -->
   <div class="screen" id="s-result">
     <div class="result-badge">✦ Votre combo parfait ✦</div>
@@ -305,7 +330,7 @@ function goTo(id){
   const next=document.getElementById(id);
   setTimeout(()=>next.classList.add('active'),50);
   // progress
-  const steps={['s-welcome']:0,['s-style']:33,['s-intensity']:66,['s-result']:100};
+  const steps={['s-welcome']:0,['s-style']:25,['s-intensity']:50,['s-wheel']:80,['s-result']:100};
   document.getElementById('progress').style.width=(steps[id]||0)+'%';
 }
 
@@ -320,7 +345,65 @@ function selectIntensity(el){
   document.querySelectorAll('.intensity-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
   chosen.intensity=el.dataset.val;
-  setTimeout(()=>showResult(),400);
+  setTimeout(()=>showWheel(),400);
+}
+
+function showWheel(){
+  goTo('s-wheel');
+  const canvas=document.getElementById('wheelCanvas');
+  const ctx=canvas.getContext('2d');
+  const cx=280,cy=280,r=260;
+  // Gather all combo names for the wheel segments
+  const allStyles=['natural','bold','glamour','nude'];
+  const allIntensities=['subtile','moderee','intense'];
+  const segments=[];
+  allStyles.forEach(s=>{
+    allIntensities.forEach(i=>{
+      const c=COMBOS[s][i];
+      const tmp=document.createElement('span');tmp.innerHTML=c.title;
+      segments.push({label:tmp.textContent,style:s,intensity:i,linerColor:c.liner.color,lipColor:c.lip.color});
+    });
+  });
+  const n=segments.length;
+  const arc=2*Math.PI/n;
+  // Find winning index
+  const winIdx=segments.findIndex(s=>s.style===chosen.style&&s.intensity===chosen.intensity);
+  // Draw wheel
+  const colors=['#1a1216','#171018','#1a150f','#14110d','#18101a','#151210','#1a1015','#10141a','#1a1410','#141018','#181410','#101418'];
+  segments.forEach((seg,i)=>{
+    const start=i*arc-Math.PI/2;
+    const end=start+arc;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,end);ctx.closePath();
+    ctx.fillStyle=colors[i%colors.length];ctx.fill();
+    ctx.strokeStyle='rgba(201,169,110,.25)';ctx.lineWidth=1;ctx.stroke();
+    // Swatch dots
+    const mid=start+arc/2;
+    const dotR=r*0.7;
+    const dx=cx+Math.cos(mid)*dotR,dy=cy+Math.sin(mid)*dotR;
+    ctx.beginPath();ctx.arc(dx,dy,12,0,2*Math.PI);ctx.fillStyle=seg.linerColor;ctx.fill();
+    ctx.beginPath();ctx.arc(dx+18,dy,12,0,2*Math.PI);ctx.fillStyle=seg.lipColor;ctx.fill();
+    // Label
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(mid);
+    ctx.fillStyle='rgba(240,236,228,.7)';ctx.font='600 11px Montserrat,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    // Truncate label
+    const lbl=seg.label.length>16?seg.label.slice(0,15)+'…':seg.label;
+    ctx.fillText(lbl,r*0.42,0);
+    ctx.restore();
+  });
+  // Spin animation: land so winIdx is at top (pointer position)
+  const targetAngle=(2*Math.PI - (winIdx*arc + arc/2)) + (2*Math.PI*5); // 5 full rotations + offset
+  const canvasEl=canvas;
+  canvasEl.style.transition='none';canvasEl.style.transform='rotate(0deg)';
+  requestAnimationFrame(()=>{requestAnimationFrame(()=>{
+    canvasEl.style.transition='transform 3.2s cubic-bezier(.17,.67,.08,.98)';
+    canvasEl.style.transform='rotate('+targetAngle+'rad)';
+  })});
+  // After spin, show result
+  setTimeout(()=>{
+    document.getElementById('wheel-label').classList.add('show');
+    document.getElementById('wheel-label').innerHTML='✦ '+segments[winIdx].label+' ✦';
+  },2800);
+  setTimeout(()=>showResult(),4200);
 }
 
 function showResult(){
@@ -352,6 +435,8 @@ function restart(){
   chosen={style:null,intensity:null};
   document.querySelectorAll('.selected').forEach(c=>c.classList.remove('selected'));
   ['prod-liner','prod-lipstick','plus','cta','restart'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  document.getElementById('wheel-label').classList.remove('show');
+  const c=document.getElementById('wheelCanvas');c.style.transition='none';c.style.transform='rotate(0deg)';
   goTo('s-welcome');
 }
 </script>
