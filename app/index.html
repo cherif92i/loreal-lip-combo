@@ -137,19 +137,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px}
 
-.q-logo{width:48px;margin:0 auto .5rem;opacity:.7}
-.app-name{font-family:var(--sans);font-size:.5rem;font-weight:500;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);opacity:.7;margin:0 auto 1.5rem;text-align:center}
-
-/* ===== WHEEL ===== */
-.wheel-wrapper{position:relative;width:260px;height:260px;margin:0 auto 1.5rem}
-.wheel-canvas canvas{width:100%;height:100%;border-radius:50%}
-.wheel-outer-ring{position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--rose);pointer-events:none;box-shadow:0 0 25px rgba(196,134,122,.2)}
-.wheel-pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);z-index:10;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:22px solid var(--rose);filter:drop-shadow(0 2px 6px rgba(196,134,122,.4))}
-.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--bg);border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 0 20px rgba(0,0,0,.5)}
-.wheel-center span{font-family:var(--serif);font-size:.6rem;color:var(--rose);letter-spacing:.1em;text-transform:uppercase}
-.wheel-sublabel{font-family:var(--serif);font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:1.5rem}
-.wheel-label{font-family:var(--serif);font-size:1.2rem;text-align:center;color:var(--text);opacity:0;transition:opacity .5s ease}
-.wheel-label.show{opacity:1}
+.q-logo{width:48px;margin:0 auto 2.5rem;opacity:.7}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
@@ -414,7 +402,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="mist"></div>
     <div class="splash-content">
       <img src="img/logo-white.png" alt="YSL" class="splash-logo">
-      <div class="app-name">LOVENUDE MATCHMAKER</div>
       <h1 class="splash-title">Lovenude</h1>
       <p class="splash-subtitle">Trouvez votre combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
@@ -424,7 +411,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q1: MATCH ou CLASH ═══ -->
   <div class="screen" id="q1">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo"><div class="app-name">LOVENUDE MATCHMAKER</div>
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">Match ou Clash ?</h2>
       <div class="choice-row">
@@ -445,7 +432,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q2: SKIN TONE ═══ -->
   <div class="screen" id="q2">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo"><div class="app-name">LOVENUDE MATCHMAKER</div>
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
       <p class="q-label">Étape 2</p>
       <h2 class="q-title">Carnation</h2>
       <div class="tone-row">
@@ -465,26 +452,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     </div>
   </div>
 
-  <!-- ═══ WHEEL ═══ -->
-  <div class="screen" id="wheel">
-    <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
-      <div class="app-name">LOVENUDE MATCHMAKER</div>
-      <div class="wheel-sublabel">Recherche de vos combos…</div>
-      <div class="wheel-wrapper">
-        <div class="wheel-pointer"></div>
-        <div class="wheel-canvas"><canvas id="wheelCanvas" width="520" height="520"></canvas></div>
-        <div class="wheel-outer-ring"></div>
-        <div class="wheel-center"><span>YSL</span></div>
-      </div>
-      <div class="wheel-label" id="wheelLabel">Vos combos arrivent…</div>
-    </div>
-  </div>
-
   <!-- ═══ RESULTS ═══ -->
   <div class="screen" id="results">
     <div class="results-header">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo"><div class="app-name">LOVENUDE MATCHMAKER</div>
+      <img src="img/logo-white.png" alt="YSL" class="q-logo">
       <div class="results-badge" id="resultsBadge"></div>
       <h2 class="results-title" id="resultsTitle">Vos Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
@@ -559,48 +530,7 @@ function setChoice(c) {
 
 function setTone(t) {
   tone = t;
-  showWheel();
-}
-
-function showWheel() {
-  goTo('wheel');
-  const canvas = document.getElementById('wheelCanvas');
-  const ctx = canvas.getContext('2d');
-  const cx=260,cy=260,r=240;
-  // Build segments from all combos
-  const allCombos=[];
-  ['match','clash'].forEach(ch=>{['clair','medium','fonce'].forEach(tn=>{
-    COMBOS[ch][tn].forEach(c=>allCombos.push({label:`${c.lip.name} + ${c.liner.name}`,lipId:c.lip.id}));
-  })});
-  const n=allCombos.length;const arc=2*Math.PI/n;
-  // Find winning segment (first combo of current selection)
-  const winCombos=COMBOS[choice][tone];
-  const winLabel=`${winCombos[0].lip.name} + ${winCombos[0].liner.name}`;
-  const winIdx=allCombos.findIndex(s=>s.label===winLabel)||0;
-  // Colors
-  const segColors=['#1a1015','#150d10','#1a100d','#10141a','#181210','#14101a','#1a1510','#151018','#1a1210','#101218','#181015','#141210'];
-  ctx.clearRect(0,0,520,520);
-  allCombos.forEach((seg,i)=>{
-    const start=i*arc-Math.PI/2,end=start+arc;
-    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,end);ctx.closePath();
-    ctx.fillStyle=segColors[i%segColors.length];ctx.fill();
-    ctx.strokeStyle='rgba(196,134,122,.2)';ctx.lineWidth=.5;ctx.stroke();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(start+arc/2);
-    ctx.fillStyle='rgba(240,236,228,.5)';ctx.font='500 9px sans-serif';ctx.textAlign='center';
-    const lbl=seg.label.length>18?seg.label.slice(0,17)+'…':seg.label;
-    ctx.fillText(lbl,r*0.55,3);ctx.restore();
-  });
-  const targetAngle=(2*Math.PI-(winIdx*arc+arc/2))+(2*Math.PI*6);
-  canvas.style.transition='none';canvas.style.transform='rotate(0deg)';
-  requestAnimationFrame(()=>{requestAnimationFrame(()=>{
-    canvas.style.transition='transform 3.2s cubic-bezier(.17,.67,.08,.98)';
-    canvas.style.transform='rotate('+targetAngle+'rad)';
-  })});
-  setTimeout(()=>{
-    const lbl=document.getElementById('wheelLabel');
-    lbl.textContent='✦ Vos combos sont prêts ✦';lbl.classList.add('show');
-  },2800);
-  setTimeout(()=>showResults(),4200);
+  showResults();
 }
 
 function showResults() {
@@ -682,8 +612,6 @@ function restart() {
   choice = '';
   tone = '';
   closeDetail();
-  const wl=document.getElementById('wheelLabel');if(wl){wl.classList.remove('show');wl.textContent='Vos combos arrivent…';}
-  const wc=document.getElementById('wheelCanvas');if(wc){wc.style.transition='none';wc.style.transform='rotate(0deg)';}
   goTo('splash');
 }
 
