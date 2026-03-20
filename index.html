@@ -395,9 +395,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ═══════════════ APP NAME ═══════════════ */
 .app-name{
   font-family:'Singulier',sans-serif;
-  font-weight:400;
-  font-size:1.1rem;
-  letter-spacing:.35em;
+  font-weight:300;
+  font-size:.55rem;
+  letter-spacing:.5em;
+  margin-top:-.2rem;
   text-transform:uppercase;
   color:var(--gold);
   margin-bottom:1.2rem;
@@ -425,7 +426,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .wheel-container{
   position:relative;
-  width:280px;height:280px;
+  width:min(80vw, 400px);height:min(80vw, 400px);
   margin:0 auto;
 }
 .wheel-canvas{
@@ -474,7 +475,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="mist"></div>
     <div class="splash-content">
       <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="splash-logo" style="width:120px">
-      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <p class="app-name">LOVENUDE MATCHMAKER</p>
       <p class="splash-subtitle">Trouve ton combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
     </div>
@@ -484,7 +485,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="screen" id="q1">
     <div class="q-content">
       <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
-      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <p class="app-name">LOVENUDE MATCHMAKER</p>
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">Match ou Clash ?</h2>
       <div class="choice-row">
@@ -506,7 +507,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="screen" id="q2">
     <div class="q-content">
       <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
-      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <p class="app-name">LOVENUDE MATCHMAKER</p>
       <p class="q-label">Étape 2</p>
       <h2 class="q-title">Ta Carnation</h2>
       <div class="tone-row">
@@ -529,7 +530,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ SPIN WHEEL ═══ -->
   <div class="screen" id="wheelScreen">
     <div class="wheel-content">
-      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <p class="app-name">LOVENUDE MATCHMAKER</p>
       <h2 class="wheel-title">On cherche ton combo...</h2>
       <div class="wheel-container">
         <div class="wheel-pointer"></div>
@@ -543,7 +544,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="screen" id="results">
     <div class="results-header">
       <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
-      <p class="app-name">YSL LOVENUDE MATCHMAKER</p>
+      <p class="app-name">LOVENUDE MATCHMAKER</p>
       <div class="results-badge" id="resultsBadge"></div>
       <h2 class="results-title" id="resultsTitle">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
