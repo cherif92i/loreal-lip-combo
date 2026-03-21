@@ -22,7 +22,7 @@
 
 /* ═══════════════ RESET & BASE ═══════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden;background:transparent;color:#3D2B1F;font-family:'Singulier',Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden;background:transparent;color:#fff;font-family:'Singulier',Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
@@ -32,7 +32,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   --rose-dark:#9B6459;
   --rose-light:#E8B4AA;
   --gold:#D4AF6F;
-  --black:#3D2B1F;
+  --black:#fff;
   --white:#F5F0EB;
 }
 
@@ -96,7 +96,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-size:clamp(3rem,12vw,6rem);
   letter-spacing:.08em;
   line-height:.9;
-  color:var(--white);
+  color:#fff;
   opacity:0;animation:fadeUp 1s .6s ease forwards;
   text-shadow:0 0 60px rgba(196,134,122,.4);
 }
@@ -116,7 +116,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-size:.85rem;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:var(--white);
+  color:#fff;
   background:rgba(196,134,122,.12);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
@@ -125,7 +125,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .btn-start:hover,.btn-start:active{
   background:rgba(196,134,122,.3);
-  border-color:var(--rose);
+  border-color:#fff;
   box-shadow:0 0 30px rgba(196,134,122,.2);
 }
 
@@ -147,12 +147,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .logo-fixed{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:65%;max-width:320px;z-index:100;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
-  color:var(--rose);margin-bottom:.8rem;
+  color:#fff;margin-bottom:.8rem;
 }
 .q-title{
   font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(1.4rem,5vw,2rem);
-  color:var(--white);
+  color:#fff;
   margin-bottom:2.5rem;
   line-height:1;
   text-transform:uppercase;
@@ -178,7 +178,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .choice-btn:hover::after,.choice-btn:active::after{opacity:1}
 .choice-btn:hover,.choice-btn:active{
-  border-color:var(--rose);
+  border-color:#fff;
   transform:scale(1.03);
   box-shadow:0 0 40px rgba(196,134,122,.15);
 }
@@ -210,7 +210,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   transition:all .4s ease;
 }
 .tone-btn:hover,.tone-btn:active{
-  border-color:var(--rose);
+  border-color:#fff;
   background:rgba(196,134,122,.15);
 }
 .tone-dot{
@@ -247,7 +247,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .results-title{
   font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(1.2rem,4vw,1.8rem);
-  color:var(--white);
+  color:#fff;
   margin-top:.5rem;
   text-transform:uppercase;
 }
@@ -273,14 +273,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .combo-card:nth-child(2){animation-delay:.2s}
 @keyframes cardReveal{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(30px)}}
 
-.combo-card:active{transform:scale(.98);border-color:var(--rose)}
+.combo-card:active{transform:scale(.98);border-color:#fff}
 
 /* Model photo - hidden until HD images arrive */
 .combo-model{display:none}
 .combo-info{padding:1.2rem 1rem}
 .combo-label{
   font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--rose);margin-bottom:.8rem;
+  color:#fff;margin-bottom:.8rem;
 }
 .combo-products{display:flex;gap:.8rem;align-items:center}
 .combo-product{display:flex;align-items:center;gap:.6rem;flex:1}
@@ -292,9 +292,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .combo-product-info{min-width:0}
 .combo-product-type{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.combo-product-name{font-size:.72rem;color:var(--white);margin-top:.1rem;line-height:1.2}
+.combo-product-name{font-size:.72rem;color:#fff;margin-top:.1rem;line-height:1.2}
 .combo-plus{
-  color:var(--rose);font-size:1.2rem;font-weight:300;flex-shrink:0;
+  color:#fff;font-size:1.2rem;font-weight:300;flex-shrink:0;
   opacity:.5;
 }
 
@@ -312,7 +312,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   position:fixed;top:1rem;right:1rem;z-index:110;
   width:44px;height:44px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;color:var(--white);
+  font-size:1.5rem;color:#fff;
   background:rgba(196,134,122,.15);
   border:1px solid rgba(196,134,122,.3);
   border-radius:50%;
@@ -336,7 +336,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   display:flex;align-items:flex-start;justify-content:center;gap:1.5rem;
 }
 .detail-plus{
-  color:var(--rose);font-size:1.5rem;font-weight:300;align-self:center;margin-top:2rem;
+  color:#fff;font-size:1.5rem;font-weight:300;align-self:center;margin-top:2rem;
 }
 .detail-product{
   flex:1;max-width:200px;
@@ -345,7 +345,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .detail-product:nth-child(3){animation-delay:.15s}
 .detail-product-type{
   font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
-  color:var(--rose);margin-bottom:.8rem;
+  color:#fff;margin-bottom:.8rem;
 }
 .detail-product-img{
   width:130px;height:130px;border-radius:50%;
@@ -355,7 +355,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .detail-product-shade{
   font-family:'SingulierHeavy',sans-serif;
-  font-size:1.3rem;color:var(--white);
+  font-size:1.3rem;color:#fff;
 }
 .detail-product-desc{
   font-size:.7rem;letter-spacing:.15em;
@@ -368,11 +368,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   padding:.8rem 2.5rem;
   border:1px solid rgba(196,134,122,.4);
   font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--white);
+  color:#fff;
   background:rgba(196,134,122,.1);
   transition:all .4s;
 }
-.btn-restart:active{background:rgba(196,134,122,.25);border-color:var(--rose)}
+.btn-restart:active{background:rgba(196,134,122,.25);border-color:#fff}
 
 /* ═══════════════ YSL FOOTER ═══════════════ */
 .ysl-footer{
@@ -424,7 +424,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .wheel-title{
   font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(1.4rem,5vw,2rem);
-  color:var(--white);
+  color:#fff;
   margin-bottom:2rem;
   text-transform:uppercase;
   opacity:0;
@@ -464,6 +464,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:0;background:transparent}
+
+/* Force all text white */
+.q-title,.q-label,.choice-btn .label,.choice-btn .desc,.choice-btn .icon,
+.wheel-title,.results-title,.app-name,.btn-restart,
+h2,p,span,button{color:#fff !important}
 </style>
 </head>
 <body>
