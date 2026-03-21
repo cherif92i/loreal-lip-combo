@@ -22,7 +22,7 @@
 
 /* ═══════════════ RESET & BASE ═══════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden;background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);color:#3D2B1F;font-family:'Singulier',Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased}
+html,body{height:100%;overflow:hidden;background:transparent;color:#3D2B1F;font-family:'Singulier',Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
@@ -38,7 +38,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ APP SHELL ═══════════════ */
 #app{position:relative;width:100%;height:100%;overflow:hidden}
-#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") center/cover no-repeat;opacity:.75;z-index:0;pointer-events:none}
+#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") center/cover no-repeat;opacity:.75;z-index:1;pointer-events:none}
 
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
@@ -54,7 +54,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ SPLASH SCREEN ═══════════════ */
 #splash{padding-top:35vh;
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   overflow:hidden;
 }
 #splash::before{
@@ -133,7 +133,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ QUESTION SCREENS ═══════════════ */
 .q-screen{
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   padding:2rem;
 }
 .q-screen::before{
@@ -226,7 +226,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ RESULTS SCREEN ═══════════════ */
 #results{
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   justify-content:flex-start;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
@@ -300,7 +300,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ DETAIL OVERLAY ═══════════════ */
 #detail{
-  background:rgba(232,196,176,.97);
+  background:transparent;
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   justify-content:flex-start;
@@ -390,7 +390,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ═══════════════ LOADING SHIMMER ═══════════════ */
 .shimmer{
   position:absolute;inset:0;z-index:9999;
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   display:flex;align-items:center;justify-content:center;
   transition:opacity .6s ease;
 }
@@ -413,7 +413,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ SPIN WHEEL ═══════════════ */
 #wheelScreen{
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   z-index:50;
 }
 #wheelScreen::before{
@@ -455,7 +455,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   position:absolute;
   top:50%;left:50%;transform:translate(-50%,-50%);
   width:50px;height:50px;border-radius:50%;
-  background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
+  background:transparent;
   border:2px solid var(--gold);
   display:flex;align-items:center;justify-content:center;
   font-size:.5rem;letter-spacing:.2em;color:var(--gold);
