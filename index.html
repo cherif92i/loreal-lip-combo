@@ -42,7 +42,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
   position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:0;
   opacity:0;pointer-events:none;
   transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1);
   transform:translateY(20px);
@@ -52,7 +52,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .screen.exit{opacity:0;transform:translateY(-20px);pointer-events:none}
 
 /* ═══════════════ SPLASH SCREEN ═══════════════ */
-#splash{
+#splash{padding-top:35vh;
   background:linear-gradient(145deg,#E8B4AA 0%,#D4967A 50%,#C4867A 100%);
   overflow:hidden;
 }
@@ -139,11 +139,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 50% 100%,rgba(196,134,122,.12) 0%,transparent 70%);
 }
-.q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px}
+.q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px;padding-top:35vh}
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:30px;left:50%;transform:translateX(-50%);width:70%;max-width:350px;z-index:100;opacity:.95;pointer-events:none}
+.logo-fixed{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:65%;max-width:320px;z-index:100;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
@@ -230,7 +230,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
-.results-header{
+.results-header{padding-top:30vh;
   width:100%;text-align:center;padding:2rem 1.5rem 1rem;
   position:relative;z-index:2;
 }
@@ -419,7 +419,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 50% 50%,rgba(212,175,111,.08) 0%,transparent 70%);
 }
-.wheel-content{position:relative;z-index:2;text-align:center}
+.wheel-content{position:relative;z-index:2;text-align:center;padding-top:30vh}
 .wheel-title{
   font-family:'SingulierHeavy',sans-serif;
   font-size:clamp(1.4rem,5vw,2rem);
