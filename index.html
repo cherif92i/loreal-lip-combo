@@ -38,6 +38,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ APP SHELL ═══════════════ */
 #app{position:relative;width:100%;height:100%;overflow:hidden}
+#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") center/cover no-repeat;opacity:.75;z-index:0;pointer-events:none}
 
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
@@ -58,7 +59,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 #splash::before{
   content:'';position:absolute;inset:0;
-  background:url('img/bg/visuel-lovenude.jpg') center/cover no-repeat;opacity:.75;
+  background:none;opacity:0;
   opacity:.35;
   animation:slowZoom 20s ease-in-out infinite alternate;
 }
