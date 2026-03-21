@@ -490,17 +490,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <img src="img/ysl-beaute-white.png" alt="YSL Beauté" class="q-logo" style="width:120px">
       <p class="app-name">LOVENUDE MATCHMAKER</p>
       <p class="q-label">Étape 1</p>
-      <h2 class="q-title">Match ou Clash ?</h2>
+      <h2 class="q-title">MATCH OU CLASH ?</h2>
       <div class="choice-row">
         <button class="choice-btn" onclick="setChoice('match')">
           <span class="icon">✦</span>
-          <span class="label">Match</span>
-          <span class="desc">Tons harmonieux</span>
+          <span class="label">MATCH</span>
+          <span class="desc">TONS HARMONIEUX</span>
         </button>
         <button class="choice-btn" onclick="setChoice('clash')">
           <span class="icon">✧</span>
-          <span class="label">Clash</span>
-          <span class="desc">Tons audacieux</span>
+          <span class="label">CLASH</span>
+          <span class="desc">TONS AUDACIEUX</span>
         </button>
       </div>
     </div>
@@ -630,7 +630,7 @@ function showResults() {
   const sub = document.getElementById('resultsSub');
   const grid = document.getElementById('combosGrid');
   
-  badge.textContent = choice === 'match' ? '✦ Match' : '✧ Clash';
+  badge.textContent = choice === 'match' ? '✦ MATCH' : '✧ CLASH';
   sub.textContent = `Carnation ${TONE_LABELS[tone]}`;
   
   grid.innerHTML = combos.map((c, i) => `
@@ -669,7 +669,7 @@ function openDetail(idx) {
   const hasPackshot = id => ['01','02','04','05','06','07','08','09','44'].includes(id);
   
   document.getElementById('detailContent').innerHTML = `
-    <div class="detail-badge">${choice === 'match' ? '✦ Match' : '✧ Clash'} · Combo ${idx+1}</div>
+    <div class="detail-badge">${choice === 'match' ? '✦ MATCH' : '✧ CLASH'} · Combo ${idx+1}</div>
     
     <div class="detail-duo">
       <div class="detail-product">
