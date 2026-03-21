@@ -1,6 +1,12 @@
-// No caching - always serve fresh
-self.addEventListener('install', e => self.skipWaiting());
+self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(k => Promise.all(k.map(c => caches.delete(c)))));
+  e.waitUntil(
+    caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
+      .then(() => self.clients.claim())
+  );
 });
-self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    fetch(e.request, { cache: 'no-store' }).catch(() => caches.match(e.request))
+  );
+});
