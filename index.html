@@ -616,6 +616,9 @@ function goTo(id) {
   next.classList.add('active');
   currentScreen = id;
   if (id === 'results') next.scrollTop = 0;
+  // Hide logo on results/detail, show on other screens
+  const logo = document.querySelector('.logo-fixed');
+  if(logo) logo.style.display = (id==='results'||id==='detail') ? 'none' : 'block';
 }
 
 function setChoice(c) {
