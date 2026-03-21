@@ -465,8 +465,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* Scrollbar */
 ::-webkit-scrollbar{width:0;background:transparent}
 
-/* Readable interactive elements */
-.tone-btn,.choice-btn{background:rgba(0,0,0,.2) !important;backdrop-filter:blur(4px)}
+/* Dark overlay behind content for readability */
+.screen::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:1}
+.screen>*{position:relative;z-index:2}
+.tone-btn,.choice-btn{background:rgba(255,255,255,.12) !important;backdrop-filter:blur(6px)}
 /* Force all text white */
 .q-title,.q-label,.choice-btn .label,.choice-btn .desc,.choice-btn .icon,
 .wheel-title,.results-title,.app-name,.btn-restart,
