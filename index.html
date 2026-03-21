@@ -143,6 +143,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
+.logo-fixed{position:fixed;top:30px;left:50%;transform:translateX(-50%);width:70%;max-width:350px;z-index:100;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
@@ -468,10 +469,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 <!-- Loading -->
 <div class="shimmer" id="loader">
-  <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="shimmer-logo" style="width:65%;max-width:320px">
 </div>
 
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(sw=>sw.unregister()))}</script><div id="app">
+  <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-fixed">
 
   <!-- ═══ SPLASH ═══ -->
   <div class="screen active" id="splash">
@@ -479,7 +480,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="mist"></div>
     <div class="splash-content">
       
-      <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-main">
       <p class="splash-subtitle">Trouve ton combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
     </div>
@@ -488,7 +488,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q1: MATCH ou CLASH ═══ -->
   <div class="screen" id="q1">
     <div class="q-content">
-      <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-main">
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">MATCH OU CLASH ?</h2>
       <div class="choice-row">
@@ -509,7 +508,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ Q2: SKIN TONE ═══ -->
   <div class="screen" id="q2">
     <div class="q-content">
-      <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-main">
       <p class="q-label">Étape 2</p>
       <h2 class="q-title">Ta Carnation</h2>
       <div class="tone-row">
@@ -532,7 +530,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ SPIN WHEEL ═══ -->
   <div class="screen" id="wheelScreen">
     <div class="wheel-content">
-      <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-main">
       <h2 class="wheel-title">On cherche ton combo...</h2>
       <div class="wheel-container">
         <div class="wheel-pointer"></div>
@@ -545,7 +542,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- ═══ RESULTS ═══ -->
   <div class="screen" id="results">
     <div class="results-header">
-      <img src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER" class="logo-main">
       <div class="results-badge" id="resultsBadge"></div>
       <h2 class="results-title" id="resultsTitle">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
