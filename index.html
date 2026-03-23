@@ -69,13 +69,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Product visual - visible on all devices */
 .splash-product{
-  position:absolute;bottom:0;left:0;right:0;z-index:1;
+  position:relative;z-index:3;
   text-align:center;pointer-events:none;
-  opacity:0;animation:fadeUp 1.2s 1.5s ease forwards;
+  margin-top:1.5rem;
+  opacity:0;animation:fadeUp 1s 1.4s ease forwards;
 }
 .splash-product img{
-  max-width:min(80%,400px);margin:0 auto;
-  filter:drop-shadow(0 0 40px rgba(196,134,122,.3));
+  max-width:min(70%,350px);margin:0 auto;
+  border-radius:12px;
+  filter:drop-shadow(0 8px 30px rgba(0,0,0,.5));
 }
 
 /* Smoke overlay */
@@ -102,7 +104,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 @keyframes mistDrift{from{transform:translateX(0)}to{transform:translateX(25%)}}
 
-.splash-content{position:relative;z-index:2;text-align:center;padding:2rem}
+.splash-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:500px}
 .splash-logo{width:80px;height:auto;margin:0 auto 2rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
 .splash-title{
   font-family:'BlackDiamond',cursive;
@@ -438,14 +440,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <div class="screen active" id="splash">
     <div class="smoke"></div>
     <div class="mist"></div>
-    <div class="splash-product">
-      <img src="img/bg/visuel-lovenude-produits.jpg" alt="Love Nude Products">
-    </div>
     <div class="splash-content">
       <img src="img/logo-white.png" alt="YSL" class="splash-logo">
       <h1 class="splash-title">Lovenude</h1>
       <p class="splash-subtitle">Trouvez votre combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
+      <div class="splash-product">
+        <img src="img/bg/visuel-lovenude-produits.jpg" alt="Love Nude Products">
+      </div>
     </div>
   </div>
 
