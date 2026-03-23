@@ -379,17 +379,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   color:rgba(255,255,255,.5);margin-top:.2rem;
 }
 
-/* Restart button */
-.btn-restart{
-  margin-top:1rem;
-  padding:.8rem 2.5rem;
-  border:1px solid rgba(196,134,122,.4);
-  font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
+/* Action buttons */
+.detail-actions{
+  margin-top:2.5rem;
+  display:flex;flex-direction:column;gap:1rem;align-items:center;
+}
+.btn-next-combo{
+  padding:.9rem 2.5rem;
+  border:2px solid #fff;
+  font-family:'Singulier',sans-serif;font-weight:400;
+  font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;
   color:#fff;
-  background:rgba(196,134,122,.1);
+  background:rgba(196,134,122,.2);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   transition:all .4s;
 }
-.btn-restart:active{background:rgba(196,134,122,.25);border-color:#fff}
+.btn-next-combo:active{background:rgba(255,255,255,.25);transform:scale(1.03)}
+.btn-restart{
+  padding:.7rem 2rem;
+  border:1px solid rgba(196,134,122,.4);
+  font-family:'Singulier',sans-serif;font-weight:300;
+  font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  background:transparent;
+  transition:all .4s;
+}
+.btn-restart:active{background:rgba(196,134,122,.15);color:#fff}
 
 /* ═══════════════ YSL FOOTER ═══════════════ */
 .ysl-footer{
@@ -787,6 +802,9 @@ function openDetail(idx) {
   const combo = COMBOS[choice][tone][idx];
   const hasPackshot = id => ['01','02','04','05','06','07','08','09','44'].includes(id);
   
+  const combos = COMBOS[choice][tone];
+  const otherIdx = idx === 0 ? 1 : 0;
+  
   document.getElementById('detailContent').innerHTML = `
     <div class="detail-badge">${choice === 'match' ? '✦ MATCH' : '✧ CLASH'} · Combo ${idx+1}</div>
     
@@ -808,6 +826,11 @@ function openDetail(idx) {
         <div class="detail-product-shade">#${combo.liner.id}</div>
         <div class="detail-product-desc">${combo.liner.name}</div>
       </div>
+    </div>
+    
+    <div class="detail-actions">
+      <button class="btn-next-combo" onclick="openDetail(${otherIdx})">Voir le Combo ${otherIdx+1} →</button>
+      <button class="btn-restart" onclick="restart()">Recommencer</button>
     </div>
   `;
   
