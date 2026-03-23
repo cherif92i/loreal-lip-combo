@@ -428,56 +428,66 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   opacity:.8;
 }
 
-/* ═══════════════ SPIN WHEEL ═══════════════ */
-#wheelScreen{
+/* ═══════════════ SHUFFLE SCREEN ═══════════════ */
+#shuffleScreen{
   background:transparent;
   z-index:50;
 }
-#wheelScreen::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 50%,rgba(212,175,111,.08) 0%,transparent 70%);
+.shuffle-content{position:relative;z-index:2;text-align:center;padding:28vh 2rem 2rem;width:100%;max-width:450px}
+.shuffle-title{
+  font-family:'Singulier',sans-serif;font-weight:300;
+  font-size:clamp(1.2rem,4vw,1.6rem);
+  color:#fff;letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .6s ease forwards;
 }
-.wheel-content{position:relative;z-index:2;text-align:center;padding-top:28vh}
-.wheel-title{
-  font-family:'SingulierHeavy',sans-serif;
-  font-size:clamp(1.4rem,5vw,2rem);
-  color:#fff;
-  margin-bottom:2rem;
-  text-transform:uppercase;
-  opacity:0;
-  animation:fadeUp .6s ease forwards;
+.shuffle-slots{display:flex;flex-direction:column;gap:2rem}
+.shuffle-slot{
+  border:1px solid rgba(196,134,122,.35);
+  background:rgba(196,134,122,.12);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  padding:1.2rem;
+  position:relative;overflow:hidden;
 }
-.wheel-container{
-  position:relative;
-  width:min(80vw, 400px);height:min(80vw, 400px);
-  margin:0 auto;
+.shuffle-slot-label{
+  font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:.8rem;
 }
-.wheel-canvas{
-  width:100%;height:100%;
-  border-radius:50%;
-  border:3px solid var(--gold);
-  box-shadow:0 0 60px rgba(212,175,111,.2),inset 0 0 30px rgba(0,0,0,.5);
+.shuffle-slot-window{
+  height:50px;overflow:hidden;position:relative;
 }
-.wheel-pointer{
-  position:absolute;
-  top:-18px;left:50%;transform:translateX(-50%);
-  width:0;height:0;
-  border-left:14px solid transparent;
-  border-right:14px solid transparent;
-  border-top:24px solid var(--gold);
-  filter:drop-shadow(0 2px 6px rgba(212,175,111,.5));
-  z-index:3;
+.shuffle-slot-reel{
+  display:flex;flex-direction:column;
+  transition:transform .1s linear;
 }
-.wheel-center{
-  position:absolute;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  width:50px;height:50px;border-radius:50%;
-  background:transparent;
-  border:2px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.5rem;letter-spacing:.2em;color:var(--gold);
-  z-index:3;
+.shuffle-slot-item{
+  height:50px;display:flex;align-items:center;justify-content:center;gap:.8rem;
+  flex-shrink:0;
 }
+.shuffle-slot-item img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
+.shuffle-slot-item span{
+  font-family:'Singulier',sans-serif;font-weight:300;
+  font-size:.9rem;letter-spacing:.15em;color:#fff;
+}
+.shuffle-slot.locked{border-color:rgba(255,255,255,.5);box-shadow:0 0 25px rgba(196,134,122,.2)}
+.shuffle-slot.locked .shuffle-slot-label{color:#fff}
+.shuffle-check{
+  position:absolute;right:1rem;top:50%;transform:translateY(-50%);
+  font-size:1.2rem;opacity:0;transition:opacity .4s;
+}
+.shuffle-slot.locked .shuffle-check{opacity:1}
+.shuffle-plus{
+  font-size:1.5rem;color:rgba(255,255,255,.4);font-weight:300;
+  text-align:center;
+}
+.shuffle-found{
+  margin-top:1.5rem;
+  font-family:'Singulier',sans-serif;font-weight:300;
+  font-size:1rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;opacity:0;
+  transition:opacity .6s;
+}
+.shuffle-found.show{opacity:1}
 
 /* ═══════════════ BACK BUTTON ═══════════════ */
 .btn-back{
@@ -595,15 +605,28 @@ h2,p,span,button{color:#fff !important}
     </div>
   </div>
 
-  <!-- ═══ SPIN WHEEL ═══ -->
-  <div class="screen" id="wheelScreen">
-    <div class="wheel-content">
-      <h2 class="wheel-title">On cherche ton combo...</h2>
-      <div class="wheel-container">
-        <div class="wheel-pointer"></div>
-        <canvas class="wheel-canvas" id="wheelCanvas" width="560" height="560"></canvas>
-        <div class="wheel-center">YSL</div>
+  <!-- ═══ SHUFFLE ═══ -->
+  <div class="screen" id="shuffleScreen">
+    <div class="shuffle-content">
+      <h2 class="shuffle-title" id="shuffleTitle">On cherche ton combo...</h2>
+      <div class="shuffle-slots">
+        <div class="shuffle-slot" id="slot1">
+          <div class="shuffle-slot-label">LIP BLUSHER</div>
+          <div class="shuffle-slot-window">
+            <div class="shuffle-slot-reel" id="reel1"></div>
+          </div>
+          <span class="shuffle-check">✦</span>
+        </div>
+        <div class="shuffle-plus">+</div>
+        <div class="shuffle-slot" id="slot2">
+          <div class="shuffle-slot-label">KISS SHAPER</div>
+          <div class="shuffle-slot-window">
+            <div class="shuffle-slot-reel" id="reel2"></div>
+          </div>
+          <span class="shuffle-check">✦</span>
+        </div>
       </div>
+      <div class="shuffle-found" id="shuffleFound">✦ Combo trouvé !</div>
     </div>
   </div>
 
@@ -686,7 +709,7 @@ function setChoice(c) {
 
 function setTone(t) {
   tone = t;
-  spinWheel();
+  runShuffle();
 }
 
 function showResults() {
@@ -771,80 +794,78 @@ function restart() {
   goTo('splash');
 }
 
-// ═══════════════ SPIN WHEEL ═══════════════
-function spinWheel() {
-  goTo('wheelScreen');
-  const canvas = document.getElementById('wheelCanvas');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height, R = W/2;
-  
-  // Shade names for wheel segments
-  const shades = [
-    {name:'Undressed Pink',color:'#E8B4AA'},
-    {name:'Naughty Pink',color:'#C4867A'},
-    {name:'Taupe Flirt',color:'#9B8579'},
-    {name:'Rouge Flagrant',color:'#B5473A'},
-    {name:'Apple Sin',color:'#A03030'},
-    {name:'Mauve-Haze',color:'#8E6478'},
-    {name:'3AM Espresso',color:'#5C3D2E'},
-    {name:'Nude Lavallière',color:'#C69C7B'},
-    {name:'Illilit Nude',color:'#D4A68A'},
-    {name:'Cacao Flirt',color:'#6B4A3A'},
-  ];
-  const N = shades.length;
-  const arc = (Math.PI*2)/N;
-  
-  function drawWheel(rotation) {
-    ctx.clearRect(0,0,W,H);
-    ctx.save();
-    ctx.translate(R,R);
-    ctx.rotate(rotation);
-    for(let i=0;i<N;i++){
-      const a = i*arc;
-      ctx.beginPath();
-      ctx.moveTo(0,0);
-      ctx.arc(0,0,R-4,a,a+arc);
-      ctx.closePath();
-      ctx.fillStyle = shades[i].color;
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(0,0,0,.3)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      // Label
-      ctx.save();
-      ctx.rotate(a+arc/2);
-      ctx.textAlign='right';
-      ctx.fillStyle=i>5?'#F5F0EB':'#1a1a1a';
-      ctx.font='bold 18px Singulier,sans-serif';
-      ctx.fillText(shades[i].name,R-16,6);
-      ctx.restore();
-    }
-    ctx.restore();
-  }
-  
-  // Animate spin: fast then decelerate
-  let angle = 0;
-  const totalRotation = Math.PI*2*6 + Math.random()*Math.PI*2; // 6+ full turns
-  const duration = 3000;
+// ═══════════════ SHUFFLE ANIMATION ═══════════════
+const ALL_LIPS = [
+  {id:'01',name:'Undressed Pink'},{id:'03',name:'Taupe Flirt'},{id:'04',name:'Rouge Flagrant'},
+  {id:'05',name:'Apple Sin'},{id:'06',name:'Naughty Pink'},{id:'07',name:'Illilit Nude'},
+  {id:'08',name:'Mauve-Haze'},{id:'09',name:'3AM Espresso'},{id:'44',name:'Nude Lavallière'}
+];
+const ALL_LINERS = [
+  {id:'01',name:'Déshabillé Rose'},{id:'102',name:'Hâle Lignes'},{id:'104',name:'Brûlant Mauve'},
+  {id:'105',name:'Brûlé Miel'},{id:'106',name:'Épicé Fumé'},{id:'107',name:'Cacao Flirt'},
+  {id:'108',name:'Hazel Enigma'},{id:'110',name:'Expresso Dreams'}
+];
+
+function buildReel(items, finalItem, type) {
+  // Build a reel: random items then the final one
+  const shuffled = [];
+  for(let i=0;i<20;i++) shuffled.push(items[Math.floor(Math.random()*items.length)]);
+  shuffled.push(finalItem);
+  const imgDir = type==='lip'?'lipstick':'liner';
+  return shuffled.map(it => 
+    `<div class="shuffle-slot-item"><img src="img/${imgDir}/${it.id}.jpg" alt=""><span>#${it.id} ${it.name}</span></div>`
+  ).join('');
+}
+
+function animateReel(reelEl, totalItems, duration, cb) {
+  const itemH = 50;
+  const target = (totalItems-1)*itemH;
   const start = performance.now();
-  
-  function animate(now) {
-    const elapsed = now - start;
-    const t = Math.min(elapsed/duration, 1);
-    // Ease out cubic
-    const ease = 1 - Math.pow(1-t, 3);
-    angle = totalRotation * ease;
-    drawWheel(angle);
-    if(t < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      // Done spinning, show results after brief pause
-      setTimeout(showResults, 600);
-    }
+  function tick(now) {
+    const t = Math.min((now-start)/duration, 1);
+    const ease = 1 - Math.pow(1-t, 3); // ease out cubic
+    reelEl.style.transform = `translateY(-${target*ease}px)`;
+    if(t<1) requestAnimationFrame(tick);
+    else if(cb) cb();
   }
+  requestAnimationFrame(tick);
+}
+
+function runShuffle() {
+  goTo('shuffleScreen');
+  const combos = COMBOS[choice][tone];
+  const combo = combos[0]; // First combo to reveal
   
-  drawWheel(0);
-  setTimeout(() => requestAnimationFrame(animate), 400);
+  // Reset
+  document.getElementById('slot1').classList.remove('locked');
+  document.getElementById('slot2').classList.remove('locked');
+  document.getElementById('shuffleFound').classList.remove('show');
+  document.getElementById('shuffleTitle').textContent = 'On cherche ton combo...';
+  
+  // Build reels
+  const reel1 = document.getElementById('reel1');
+  const reel2 = document.getElementById('reel2');
+  reel1.innerHTML = buildReel(ALL_LIPS, combo.lip, 'lip');
+  reel2.innerHTML = buildReel(ALL_LINERS, combo.liner, 'liner');
+  reel1.style.transform = 'translateY(0)';
+  reel2.style.transform = 'translateY(0)';
+  
+  // Animate: reel 1 spins for 1.5s, locks, then reel 2 spins for 1.5s, locks
+  setTimeout(() => {
+    animateReel(reel1, 21, 1800, () => {
+      document.getElementById('slot1').classList.add('locked');
+      // Start reel 2 after a beat
+      setTimeout(() => {
+        animateReel(reel2, 21, 1800, () => {
+          document.getElementById('slot2').classList.add('locked');
+          document.getElementById('shuffleFound').classList.add('show');
+          document.getElementById('shuffleTitle').textContent = '✦ Combo trouvé !';
+          // Go to results
+          setTimeout(showResults, 1200);
+        });
+      }, 400);
+    });
+  }, 300);
 }
 
 // ═══════════════ INIT ═══════════════
