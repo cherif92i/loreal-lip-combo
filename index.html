@@ -641,7 +641,7 @@ h2,p,span,button{color:#fff !important}
   <!-- ═══ SHUFFLE ═══ -->
   <div class="screen" id="shuffleScreen">
     <div class="shuffle-content">
-      <h2 class="shuffle-title" id="shuffleTitle">On cherche ton combo...</h2>
+      <h2 class="shuffle-title" id="shuffleTitle">ON CHERCHE TES COMBOS...</h2>
       <div class="shuffle-slots">
         <div class="shuffle-slot" id="slot1">
           <div class="shuffle-slot-label">LIP BLUSHER</div>
@@ -659,7 +659,7 @@ h2,p,span,button{color:#fff !important}
           <span class="shuffle-check">✦</span>
         </div>
       </div>
-      <div class="shuffle-found" id="shuffleFound">✦ Combo trouvé !</div>
+      <div class="shuffle-found" id="shuffleFound">✦ Combos trouvés !</div>
     </div>
   </div>
 
@@ -751,7 +751,7 @@ function showResults() {
   const sub = document.getElementById('resultsSub');
   const grid = document.getElementById('combosGrid');
   
-  badge.textContent = choice === 'match' ? '✦ MATCH' : '✧ CLASH';
+  badge.textContent = choice === 'match' ? '✦ TES COMBOS HARMONIEUX' : '✧ TES COMBOS AUDACIEUX';
   sub.textContent = `Carnation ${TONE_LABELS[tone]}`;
   
   grid.innerHTML = combos.map((c, i) => `
@@ -873,7 +873,7 @@ function runShuffle() {
   document.getElementById('slot1').classList.remove('locked');
   document.getElementById('slot2').classList.remove('locked');
   document.getElementById('shuffleFound').classList.remove('show');
-  document.getElementById('shuffleTitle').textContent = 'On cherche ton combo...';
+  document.getElementById('shuffleTitle').textContent = 'ON CHERCHE TES COMBOS...';
   
   // Build reels
   const reel1 = document.getElementById('reel1');
@@ -892,7 +892,7 @@ function runShuffle() {
         animateReel(reel2, 21, 1800, () => {
           document.getElementById('slot2').classList.add('locked');
           document.getElementById('shuffleFound').classList.add('show');
-          document.getElementById('shuffleTitle').textContent = '✦ Combo trouvé !';
+          document.getElementById('shuffleTitle').textContent = '✦ Combos trouvés !';
           // Go to results
           setTimeout(showResults, 1200);
         });
