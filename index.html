@@ -110,26 +110,39 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .btn-start{
   margin-top:3rem;
-  padding:1rem 3rem;
-  border:1px solid rgba(196,134,122,.5);
+  padding:1.1rem 3.5rem;
+  border:2px solid #fff;
   font-family:'Singulier',serif;
-  font-size:.85rem;
-  letter-spacing:.3em;
+  font-weight:400;
+  font-size:.9rem;
+  letter-spacing:.35em;
   text-transform:uppercase;
   color:#fff;
-  background:rgba(196,134,122,.12);
+  background:rgba(196,134,122,.2);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   transition:all .4s ease;
   opacity:0;animation:fadeUp 1s 1.2s ease forwards;
+  box-shadow:0 0 20px rgba(255,255,255,.15);
 }
 .btn-start:hover,.btn-start:active{
-  background:rgba(196,134,122,.3);
+  background:rgba(255,255,255,.25);
   border-color:#fff;
-  box-shadow:0 0 30px rgba(196,134,122,.2);
+  box-shadow:0 0 40px rgba(255,255,255,.3);
+  transform:scale(1.05);
 }
 
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(20px)}}
+@keyframes btnGlow{
+  0%,100%{box-shadow:0 0 20px rgba(255,255,255,.15)}
+  50%{box-shadow:0 0 35px rgba(255,255,255,.3),0 0 60px rgba(196,134,122,.2)}
+}
+@keyframes floatUp{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+.btn-start{animation:fadeUp 1s 1.2s ease forwards,btnGlow 3s 2.5s ease-in-out infinite !important}
+.splash-content{animation:floatUp 6s 2s ease-in-out infinite}
 
 /* ═══════════════ QUESTION SCREENS ═══════════════ */
 .q-screen{
@@ -512,9 +525,9 @@ h2,p,span,button{color:#fff !important}
   .detail-product-shade{font-size:1.8rem}
   .logo-fixed{max-width:280px;width:50%}
 }
-/* Portrait tablet/mobile: use portrait version of background */
+/* Portrait tablet: keep product visible */
 @media (max-aspect-ratio:4/3){
-  #app::after{background-image:url("img/bg/visuel-lovenude-portrait.jpg");background-position:center center}
+  #app::after{background-position:35% center}
 }
 </style>
 </head>
