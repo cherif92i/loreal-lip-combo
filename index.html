@@ -38,7 +38,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ APP SHELL ═══════════════ */
 #app{position:relative;width:100%;height:100%;overflow:hidden}
-#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") center center/150% auto no-repeat;opacity:.65;z-index:-1;pointer-events:none}
+#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") 35% center/cover no-repeat;opacity:.55;z-index:-1;pointer-events:none}
 
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
@@ -514,7 +514,7 @@ h2,p,span,button{color:#fff !important}
 }
 /* Portrait tablet: ensure product (left side of bg) stays visible */
 @media (max-aspect-ratio:4/3){
-  #app::after{background-size:120% auto;background-position:center 40%}
+  #app::after{background-position:35% center}
 }
 </style>
 </head>
