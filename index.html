@@ -255,10 +255,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .results-header .q-logo{margin-bottom:1rem}
 .results-badge{
   display:inline-block;
-  padding:.4rem 1.5rem;
-  border:1px solid var(--rose);
-  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
-  color:var(--rose-light);
+  padding:.6rem 2rem;
+  border:1px solid rgba(255,255,255,.5);
+  font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;
   margin-bottom:.5rem;
 }
 .results-title{
@@ -296,7 +296,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .combo-model{display:none}
 .combo-info{padding:1.2rem 1rem}
 .combo-label{
-  font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
 }
 .combo-products{display:flex;gap:.8rem;align-items:center}
@@ -308,8 +308,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   flex-shrink:0;
 }
 .combo-product-info{min-width:0}
-.combo-product-type{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.combo-product-name{font-size:.72rem;color:#fff;margin-top:.1rem;line-height:1.2}
+.combo-product-type{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.combo-product-name{font-size:.9rem;color:#fff;margin-top:.15rem;line-height:1.2}
 .combo-plus{
   color:#fff;font-size:1.2rem;font-weight:300;flex-shrink:0;
   opacity:.5;
@@ -668,7 +668,7 @@ h2,p,span,button{color:#fff !important}
     <button class="btn-back" onclick="goTo('q2')">←</button>
     <div class="results-header">
       <div class="results-badge" id="resultsBadge"></div>
-      <h2 class="results-title" id="resultsTitle">Tes Combos</h2>
+      <h2 class="results-title" id="resultsTitle" style="display:none">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
     </div>
     <div class="combos-grid" id="combosGrid"></div>
