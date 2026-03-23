@@ -150,12 +150,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   color:#fff;margin-bottom:.8rem;
 }
 .q-title{
-  font-family:'SingulierHeavy',sans-serif;
+  font-family:'Singulier',sans-serif;
+  font-weight:300;
   font-size:clamp(1.4rem,5vw,2rem);
   color:#fff;
   margin-bottom:2.5rem;
   line-height:1;
   text-transform:uppercase;
+  letter-spacing:.15em;
 }
 
 /* Match / Clash buttons */
@@ -163,10 +165,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .choice-btn{
   flex:1;min-width:140px;max-width:180px;
   padding:2.5rem 1rem;
-  border:1px solid rgba(196,134,122,.3);
+  border:1px solid rgba(196,134,122,.35);
   background:rgba(196,134,122,.06);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
   text-align:center;
   transition:all .5s cubic-bezier(.4,0,.2,1);
   position:relative;overflow:hidden;
@@ -184,10 +186,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .choice-btn .icon{font-size:2rem;margin-bottom:.8rem;display:block}
 .choice-btn .label{
-  font-family:'SingulierHeavy',sans-serif;
+  font-family:'Singulier',sans-serif;
+  font-weight:300;
   font-size:1.8rem;
   display:block;
-  letter-spacing:.05em;
+  letter-spacing:.15em;
 }
 .choice-btn .desc{
   font-size:.65rem;
@@ -202,11 +205,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tone-row{display:flex;flex-direction:column;gap:.8rem;width:100%}
 .tone-btn{
   padding:1.4rem 2rem;
-  border:1px solid rgba(196,134,122,.25);
+  border:1px solid rgba(196,134,122,.35);
   background:rgba(196,134,122,.05);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  display:flex;align-items:center;gap:1.2rem;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;gap:1.2rem;
   transition:all .4s ease;
 }
 .tone-btn:hover,.tone-btn:active{
@@ -221,7 +224,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tone-dot.medium{background:linear-gradient(135deg,#C69C7B,#B08968)}
 .tone-dot.fonce{background:linear-gradient(135deg,#7B5B4C,#5C3D2E)}
 .tone-label{
-  font-size:1rem;letter-spacing:.2em;text-transform:uppercase;
+  font-family:'Singulier',sans-serif;font-weight:300;
+  font-size:1rem;letter-spacing:.25em;text-transform:uppercase;
 }
 
 /* ═══════════════ RESULTS SCREEN ═══════════════ */
@@ -468,7 +472,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* Dark overlay behind content for readability */
 .screen::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:1}
 .screen>*{position:relative;z-index:2}
-.tone-btn,.choice-btn{background:rgba(255,255,255,.12) !important;backdrop-filter:blur(6px)}
+.tone-btn,.choice-btn{background:rgba(196,134,122,.18) !important;backdrop-filter:blur(6px);justify-content:center}
 /* Force all text white */
 .q-title,.q-label,.choice-btn .label,.choice-btn .desc,.choice-btn .icon,
 .wheel-title,.results-title,.app-name,.btn-restart,
