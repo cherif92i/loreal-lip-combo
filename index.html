@@ -468,18 +468,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ BACK BUTTON ═══════════════ */
 .btn-back{
-  position:fixed;top:1.2rem;left:1.2rem;z-index:110;
+  position:fixed !important;top:1.2rem;left:1.2rem;z-index:200 !important;
   width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;color:#fff;
-  background:rgba(196,134,122,.18);
+  font-size:1.2rem;color:#fff !important;
+  background:rgba(196,134,122,.25);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(196,134,122,.35);
+  border:1px solid rgba(196,134,122,.4);
   border-radius:50%;
   transition:all .3s;
   font-family:'Singulier',sans-serif;font-weight:300;
 }
-.btn-back:active{background:rgba(196,134,122,.35)}
+.btn-back:active{background:rgba(196,134,122,.45)}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:0;background:transparent}
@@ -548,12 +548,12 @@ h2,p,span,button{color:#fff !important}
         <button class="choice-btn" onclick="setChoice('match')">
           <span class="icon">✦</span>
           <span class="label">MATCH</span>
-          <span class="desc">TONS HARMONIEUX</span>
+          <span class="desc">COMBOS HARMONIEUX</span>
         </button>
         <button class="choice-btn" onclick="setChoice('clash')">
           <span class="icon">✧</span>
           <span class="label">CLASH</span>
-          <span class="desc">TONS AUDACIEUX</span>
+          <span class="desc">COMBOS AUDACIEUX</span>
         </button>
       </div>
     </div>
