@@ -168,7 +168,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:clamp(80px,15vw,113px);z-index:200;opacity:.95;pointer-events:none;display:none}
+.logo-fixed{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:clamp(80px,15vw,113px);z-index:200;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -815,6 +815,7 @@ const COMBOS = {
 const TONE_LABELS = { clair:'Clair', medium:'Medium', fonce:'Foncé' };
 
 let choice = '', tone = '', currentScreen = 'splash';
+document.querySelector('.logo-fixed').style.display = 'none';
 
 // ═══════════════ NAVIGATION ═══════════════
 function goTo(id) {
