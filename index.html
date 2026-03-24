@@ -311,6 +311,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border:2px solid rgba(255,255,255,.1);
   flex-shrink:0;
 }
+.combo-swatch.lip-swatch{background:#fff}
 .combo-product-info{min-width:0}
 .combo-product-type{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .combo-product-name{font-size:.9rem;color:#fff;margin-top:.15rem;line-height:1.2}
@@ -374,6 +375,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border:2px solid rgba(196,134,122,.2);
   box-shadow:0 0 40px rgba(196,134,122,.1);
 }
+.detail-product-img.lip-img{background:#fff}
 .detail-product-shade{
   font-family:'SingulierHeavy',sans-serif;
   font-size:1.3rem;color:#fff;
@@ -483,6 +485,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   flex-shrink:0;overflow:hidden;box-sizing:border-box;
 }
 .shuffle-slot-item img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15);flex-shrink:0}
+.shuffle-slot-item img.lip-reel{background:#fff}
 .shuffle-slot-item span{
   font-family:'Singulier',sans-serif;font-weight:300;
   font-size:.9rem;letter-spacing:.15em;color:#fff;
@@ -843,7 +846,7 @@ function showResults() {
         <div class="combo-label">Combo ${i+1}</div>
         <div class="combo-products">
           <div class="combo-product">
-            <img class="combo-swatch" src="img/lipstick/${c.lip.id}.jpg" alt="">
+            <img class="combo-swatch lip-swatch" src="img/lipstick/${c.lip.id}.jpg" alt="">
             <div class="combo-product-info">
               <div class="combo-product-type">Lip Blusher</div>
               <div class="combo-product-name">#${c.lip.id} ${c.lip.name}</div>
@@ -879,8 +882,8 @@ function openDetail(idx) {
       <div class="detail-product">
         <div class="detail-product-type">Lip Blusher</div>
         ${hasPackshot(combo.lip.id) 
-          ? `<img class="detail-product-img" src="img/packshot/lipstick-${combo.lip.id}.jpg" alt="">`
-          : `<img class="detail-product-img" src="img/lipstick/${combo.lip.id}.jpg" alt="">`}
+          ? `<img class="detail-product-img lip-img" src="img/packshot/lipstick-${combo.lip.id}.jpg" alt="">`
+          : `<img class="detail-product-img lip-img" src="img/lipstick/${combo.lip.id}.jpg" alt="">`}
         <div class="detail-product-shade">#${combo.lip.id}</div>
         <div class="detail-product-desc">${combo.lip.name}</div>
       </div>
@@ -930,13 +933,13 @@ const ALL_LINERS = [
 ];
 
 function buildReel(items, finalItem, type) {
-  // Build a reel: random items then the final one
   const shuffled = [];
   for(let i=0;i<20;i++) shuffled.push(items[Math.floor(Math.random()*items.length)]);
   shuffled.push(finalItem);
   const imgDir = type==='lip'?'lipstick':'liner';
+  const cls = type==='lip'?' lip-reel':'';
   return shuffled.map(it => 
-    `<div class="shuffle-slot-item"><img src="img/${imgDir}/${it.id}.jpg" alt=""><span>#${it.id} ${it.name}</span></div>`
+    `<div class="shuffle-slot-item"><img class="${cls}" src="img/${imgDir}/${it.id}.jpg" alt=""><span>#${it.id} ${it.name}</span></div>`
   ).join('');
 }
 
