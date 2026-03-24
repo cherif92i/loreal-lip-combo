@@ -553,35 +553,78 @@ h2,p,span,button{color:#fff !important}
 }
 /* Desktop */
 @media (min-width:1024px){
-  .q-content{max-width:600px;padding-top:max(22vh,240px)}
-  .logo-fixed{max-width:240px;width:30%}
-  .q-title{font-size:clamp(2rem,4vw,3rem)}
-  .tone-row{max-width:550px;margin:0 auto}
-  .tone-btn{padding:1.8rem 2.5rem}
-  .tone-label{font-size:1.2rem}
-  .tone-dot{width:44px;height:44px}
-  .choice-btn{min-width:220px;max-width:260px;padding:3rem 1.5rem}
-  .choice-btn .label{font-size:2.4rem}
-  .choice-btn .desc{font-size:.75rem}
-  .combos-grid{max-width:700px;padding:1.5rem 2rem 3rem}
-  .combo-card{padding:0}
-  .combo-info{padding:1.8rem 1.5rem}
-  .combo-label{font-size:.7rem}
-  .combo-swatch{width:60px;height:60px}
-  .combo-product-name{font-size:1rem}
-  .combo-product-type{font-size:.6rem}
-  .combo-plus{font-size:1.5rem}
-  .results-title{font-size:clamp(1.8rem,3vw,2.5rem)}
-  .results-badge{font-size:.75rem;padding:.5rem 2rem}
-  .results-sub{font-size:.85rem}
-  .shuffle-content{max-width:600px}
-  .shuffle-slot-item span{font-size:1.1rem}
-  .shuffle-slot-item img{width:50px;height:50px}
-  .shuffle-slot-window{height:60px}
-  .shuffle-slot-item{height:60px}
-  .detail-product-img{width:200px;height:200px}
-  .detail-product-shade{font-size:2rem}
+  /* Layout */
+  .q-content{max-width:700px;padding-top:max(20vh,220px)}
+  .logo-fixed{max-width:220px;width:25%}
   .splash-content{margin-bottom:20vh}
+  .splash-title{font-size:clamp(4rem,8vw,6rem)}
+  .splash-subtitle{font-size:1.2rem;letter-spacing:.5em}
+  .btn-start{padding:1.3rem 5rem;font-size:1.1rem}
+
+  /* Q screens */
+  .q-title{font-size:clamp(2.2rem,4vw,3.2rem)}
+  .q-label{font-size:.85rem}
+  .choice-row{gap:2rem}
+  .choice-btn{min-width:240px;max-width:300px;padding:3.5rem 2rem}
+  .choice-btn .label{font-size:2.8rem}
+  .choice-btn .desc{font-size:.8rem;letter-spacing:.2em}
+  .choice-btn .icon{font-size:2.5rem}
+  .tone-row{max-width:600px;margin:0 auto;gap:1rem}
+  .tone-btn{padding:2rem 3rem}
+  .tone-label{font-size:1.3rem}
+  .tone-dot{width:50px;height:50px}
+
+  /* Results */
+  .results-badge{font-size:1rem;padding:.7rem 2.5rem}
+  .results-sub{font-size:.9rem;letter-spacing:.3em}
+  .combos-grid{max-width:800px;padding:2rem 2.5rem 3rem}
+  .combo-card{padding:0}
+  .combo-info{padding:2rem 2rem}
+  .combo-label{font-size:.85rem;letter-spacing:.35em}
+  .combo-swatch{width:70px;height:70px}
+  .combo-product-name{font-size:1.15rem}
+  .combo-product-type{font-size:.75rem}
+  .combo-plus{font-size:1.8rem}
+
+  /* Detail */
+  .detail-content{max-width:700px}
+  .detail-badge{font-size:1rem;padding:.7rem 2.5rem}
+  .detail-product-type{font-size:.8rem}
+  .detail-product-img{width:220px;height:220px}
+  .detail-product-shade{font-size:2.2rem}
+  .detail-product-desc{font-size:.9rem}
+  .detail-plus{font-size:2rem}
+  .btn-next-combo{font-size:1rem;padding:1.1rem 3.5rem}
+  .btn-restart{font-size:.85rem;padding:.9rem 2.5rem}
+
+  /* Shuffle */
+  .shuffle-content{max-width:650px}
+  .shuffle-title{font-size:clamp(1.4rem,3vw,2rem)}
+  .shuffle-slot{padding:1.8rem}
+  .shuffle-slot-label{font-size:.7rem}
+  .shuffle-slot-item span{font-size:1.2rem}
+  .shuffle-slot-item img{width:55px;height:55px}
+  .shuffle-slot-window{height:65px}
+  .shuffle-slot-item{height:65px}
+  .shuffle-found{font-size:1.2rem}
+  .shuffle-plus{font-size:2rem}
+
+  /* Back button */
+  .btn-back{width:48px;height:48px;font-size:1.4rem}
+}
+
+/* Large desktop */
+@media (min-width:1440px){
+  .q-content{max-width:800px}
+  .combos-grid{max-width:900px}
+  .detail-content{max-width:800px}
+  .shuffle-content{max-width:750px}
+  .choice-btn{min-width:280px;max-width:340px;padding:4rem 2rem}
+  .choice-btn .label{font-size:3.2rem}
+  .detail-product-img{width:250px;height:250px}
+  .combo-swatch{width:80px;height:80px}
+  .combo-product-name{font-size:1.3rem}
+  .combo-info{padding:2.5rem 2.5rem}
 }
 /* Portrait tablet: keep product visible */
 @media (max-aspect-ratio:4/3){
