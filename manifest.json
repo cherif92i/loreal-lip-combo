@@ -1,22 +1,12 @@
 {
-  "name": "YSL LOVENUDE Matchmaker",
+  "name": "LOVENUDE Matchmaker",
   "short_name": "LOVENUDE",
-  "description": "Trouvez votre combo lèvres parfait — Match ou Clash",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
+  "background_color": "#c4867a",
+  "theme_color": "#c4867a",
   "icons": [
-    {
-      "src": "img/logo-white.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "img/logo-white.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    {"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"}
   ]
 }
