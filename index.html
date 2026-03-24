@@ -90,6 +90,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes mistDrift{from{transform:translateX(0)}to{transform:translateX(25%)}}
 
 .splash-content{position:relative;z-index:2;text-align:center;padding:2rem}
+.splash-logo{width:clamp(120px,30vw,180px);margin:0 auto 2rem;display:block}
+#splash.active~.logo-fixed,#splash.active+.logo-fixed{opacity:1}
+
 .splash-logo{width:160px;height:auto;margin:0 auto 1rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
 .splash-title{
   font-family:'SingulierHeavy',sans-serif;
@@ -159,7 +162,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:clamp(80px,15vw,113px);z-index:200;opacity:.95;pointer-events:none}
+.logo-fixed{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:clamp(80px,15vw,113px);z-index:200;opacity:.95;pointer-events:none;display:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -654,7 +657,7 @@ h2,p,span,button{color:#fff !important}
     <div class="smoke"></div>
     <div class="mist"></div>
     <div class="splash-content">
-      
+      <img class="splash-logo" src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER">
       <p class="splash-subtitle">Trouve ton combo lèvres</p>
       <button class="btn-start" onclick="goTo('q1')">Commencer</button>
     </div>
@@ -809,6 +812,7 @@ let choice = '', tone = '', currentScreen = 'splash';
 
 // ═══════════════ NAVIGATION ═══════════════
 function goTo(id) {
+  document.querySelector('.logo-fixed').style.display = id==='splash' ? 'none' : '';
   const prev = document.getElementById(currentScreen);
   const next = document.getElementById(id);
   prev.classList.remove('active');
