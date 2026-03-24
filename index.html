@@ -159,8 +159,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:30px;left:50%;transform:translateX(-50%);width:34%;max-width:176px;z-index:200;opacity:.95;pointer-events:none;transition:opacity .4s}
-.logo-fixed.hide{opacity:0}
+.logo-fixed{position:fixed;top:30px;left:50%;transform:translateX(-50%);width:34%;max-width:176px;z-index:200;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -736,10 +735,9 @@ h2,p,span,button{color:#fff !important}
   </div>
 
   <!-- ═══ RESULTS ═══ -->
-  <div class="screen" id="results" style="padding-top:2rem;">
+  <div class="screen" id="results" style="padding-top:max(22vh,180px);">
     <button class="btn-back" onclick="goTo('q2')">←</button>
     <div class="results-header">
-      <img src="img/logo-lovenude.png" alt="LOVENUDE" style="width:34%;max-width:176px;margin:2rem auto 1.5rem;display:block;opacity:.95">
       <div class="results-badge" id="resultsBadge"></div>
       <h2 class="results-title" id="resultsTitle" style="display:none">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
@@ -749,9 +747,8 @@ h2,p,span,button{color:#fff !important}
   </div>
 
   <!-- ═══ DETAIL OVERLAY ═══ -->
-  <div class="screen" id="detail" style="padding-top:2rem;">
+  <div class="screen" id="detail" style="padding-top:max(22vh,180px);">
     <button class="btn-back" onclick="closeDetail()">←</button>
-    <div style="text-align:center"><img src="img/logo-lovenude.png" alt="LOVENUDE" style="width:34%;max-width:176px;margin:2rem auto 1.5rem;display:inline-block;opacity:.95"></div>
     <div class="detail-content" id="detailContent"></div>
   </div>
 
@@ -833,14 +830,6 @@ function goTo(id) {
   next.classList.add('active');
   currentScreen = id;
   if (id === 'results') next.scrollTop = 0;
-  // Hide logo on scrollable screens to avoid overlap
-  const logo = document.querySelector('.logo-fixed');
-  if (id === 'results' || id === 'detail') {
-    logo.classList.add('hide');
-  } else {
-    logo.classList.remove('hide');
-  }
-  // Also show detail logo
   if (id === 'detail') document.getElementById('detail').scrollTop = 0;
 }
 
