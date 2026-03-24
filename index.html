@@ -531,6 +531,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Dark overlay behind content for readability */
 .screen::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1;pointer-events:none}
+#results::before,#detail::before{position:sticky;top:0;width:100%;height:100vh;margin-bottom:-100vh}
 .screen>*{position:relative;z-index:2}
 .tone-btn,.choice-btn{background:rgba(196,134,122,.18) !important;backdrop-filter:blur(6px);justify-content:center}
 /* Force all text white */
