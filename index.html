@@ -676,13 +676,6 @@ h2,p,span,button{color:#fff !important}
           <span class="desc">COMBOS AUDACIEUX</span>
         </button>
       </div>
-      <div class="choice-row" style="margin-top:.8rem">
-        <button class="choice-btn" onclick="setChoice('ton-sur-ton')">
-          <span class="icon">◈</span>
-          <span class="label">TON SUR TON</span>
-          <span class="desc">COMBOS SIGNATURES</span>
-        </button>
-      </div>
     </div>
   </div>
 
@@ -757,19 +750,9 @@ h2,p,span,button{color:#fff !important}
 <script>
 // ═══════════════ DATA ═══════════════
 const COMBOS = {
-  'ton-sur-ton': {
-    clair: [
-      { lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'44',name:'Nude Lavallière'} }
-    ],
-    medium: [
-      { lip:{id:'07',name:'Illilit Nude'}, liner:{id:'103',name:'Rougissant Nude'} }
-    ],
-    fonce: [
-      { lip:{id:'09',name:'3AM Espresso'}, liner:{id:'110',name:'Expresso Dreams'} }
-    ]
-  },
   match: {
     clair: [
+      { lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'44',name:'Nude Lavallière'}, tst:true },
       { lip:{id:'01',name:'Undressed Pink'}, liner:{id:'01',name:'Déshabillé Rose'} },
       { lip:{id:'06',name:'Naughty Pink'}, liner:{id:'104',name:'Brûlant Mauve'} },
       { lip:{id:'02',name:'Sassy Peach'}, liner:{id:'102',name:'Tan Lignes'} },
@@ -777,6 +760,7 @@ const COMBOS = {
       { lip:{id:'44',name:'Nude Lavallière'}, liner:{id:'102',name:'Tan Lignes'} }
     ],
     medium: [
+      { lip:{id:'07',name:'Illilit Nude'}, liner:{id:'103',name:'Rougissant Nude'}, tst:true },
       { lip:{id:'03',name:'Taupe Flirt'}, liner:{id:'108',name:'Hazel Enigma'} },
       { lip:{id:'02',name:'Sassy Peach'}, liner:{id:'105',name:'Brûlé Miel'} },
       { lip:{id:'08',name:'Mauve-Haze'}, liner:{id:'104',name:'Brûlant Mauve'} },
@@ -784,11 +768,12 @@ const COMBOS = {
       { lip:{id:'07',name:'Illilit Nude'}, liner:{id:'107',name:'Cacao Flirt'} }
     ],
     fonce: [
-      { lip:{id:'09',name:'3AM Espresso'}, liner:{id:'107',name:'Cacao Flirt'} },
+      { lip:{id:'09',name:'3AM Espresso'}, liner:{id:'110',name:'Expresso Dreams'}, tst:true },
       { lip:{id:'04',name:'Rouge Flagrant'}, liner:{id:'106',name:'Épicé Fumé'} },
       { lip:{id:'05',name:'Apple Sin'}, liner:{id:'107',name:'Cacao Flirt'} },
       { lip:{id:'07',name:'Illilit Nude'}, liner:{id:'107',name:'Cacao Flirt'} },
-      { lip:{id:'08',name:'Mauve-Haze'}, liner:{id:'110',name:'Expresso Dreams'} }
+      { lip:{id:'08',name:'Mauve-Haze'}, liner:{id:'110',name:'Expresso Dreams'} },
+      { lip:{id:'09',name:'3AM Espresso'}, liner:{id:'107',name:'Cacao Flirt'} }
     ]
   },
   clash: {
@@ -849,7 +834,7 @@ function showResults() {
   const sub = document.getElementById('resultsSub');
   const grid = document.getElementById('combosGrid');
   
-  badge.textContent = choice === 'match' ? '✦ TES COMBOS HARMONIEUX' : choice === 'clash' ? '✧ TES COMBOS AUDACIEUX' : '◈ TON SUR TON';
+  badge.textContent = choice === 'match' ? '✦ TES COMBOS HARMONIEUX' : '✧ TES COMBOS AUDACIEUX';
   sub.textContent = `Carnation ${TONE_LABELS[tone]}`;
   
   grid.innerHTML = combos.map((c, i) => `
@@ -889,7 +874,7 @@ function openDetail(idx) {
   const otherIdx = (idx + 1) % combos.length;
   
   document.getElementById('detailContent').innerHTML = `
-    <div class="detail-badge">${choice === 'match' ? '✦ MATCH' : choice === 'clash' ? '✧ CLASH' : '◈ TON SUR TON'} · Combo ${idx+1}</div>
+    <div class="detail-badge">${choice === 'match' ? '✦ MATCH' : '✧ CLASH'} · Combo ${idx+1}</div>
     
     <div class="detail-duo">
       <div class="detail-product">
