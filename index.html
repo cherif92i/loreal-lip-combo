@@ -96,7 +96,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes mistDrift{from{transform:translateX(0)}to{transform:translateX(25%)}}
 
 .splash-content{position:relative;z-index:2;text-align:center;padding:2rem}
-.splash-logo{width:clamp(120px,30vw,180px);margin:0 auto 2rem;display:block}
+.splash-logo{width:clamp(120px,30vw,180px);margin:0 auto 2rem;display:block;transition:all .6s cubic-bezier(.4,0,.2,1)}
+.splash-logo.fly-up{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:160px;z-index:300;margin:0}
 #splash.active~.logo-fixed,#splash.active+.logo-fixed{opacity:1}
 
 .splash-logo{width:160px;height:auto;margin:0 auto 1rem;opacity:0;animation:fadeUp 1s .3s ease forwards}
@@ -665,7 +666,7 @@ h2,p,span,button{color:#fff !important}
     <div class="splash-content">
       <img class="splash-logo" src="img/logo-lovenude.png" alt="LOVENUDE MATCHMAKER">
       <p class="splash-subtitle">Trouve ton combo lèvres</p>
-      <button class="btn-start" onclick="goTo('q1')">Commencer</button>
+      <button class="btn-start" onclick="startApp()">Commencer</button>
     </div>
   </div>
 
@@ -818,6 +819,16 @@ let choice = '', tone = '', currentScreen = 'splash';
 document.querySelector('.logo-fixed').style.display = 'none';
 
 // ═══════════════ NAVIGATION ═══════════════
+function startApp() {
+  const splashLogo = document.querySelector('.splash-logo');
+  splashLogo.classList.add('fly-up');
+  setTimeout(() => {
+    document.querySelector('.logo-fixed').style.display = '';
+    splashLogo.style.opacity = '0';
+    goTo('q1');
+  }, 600);
+}
+
 function goTo(id) {
   document.querySelector('.logo-fixed').style.display = id==='splash' ? 'none' : '';
   document.getElementById('app').classList.toggle('bg-blur', id==='results');
@@ -830,6 +841,11 @@ function goTo(id) {
   currentScreen = id;
   if (id === 'results') next.scrollTop = 0;
   if (id === 'detail') document.getElementById('detail').scrollTop = 0;
+  if (id === 'splash') {
+    const sl = document.querySelector('.splash-logo');
+    sl.classList.remove('fly-up');
+    sl.style.opacity = '';
+  }
 }
 
 function setChoice(c) {
