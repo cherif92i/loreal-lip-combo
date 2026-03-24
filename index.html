@@ -43,7 +43,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ APP SHELL ═══════════════ */
 #app{position:relative;width:100%;height:100%;overflow:hidden}
-#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") 35% center/cover no-repeat fixed;opacity:.55;z-index:-1;pointer-events:none}
+#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") 35% center/cover no-repeat fixed;opacity:.55;z-index:-1;pointer-events:none;transition:filter .5s ease}
+#app.bg-blur::after{filter:blur(10px)}
 
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
@@ -818,6 +819,7 @@ let choice = '', tone = '', currentScreen = 'splash';
 // ═══════════════ NAVIGATION ═══════════════
 function goTo(id) {
   document.querySelector('.logo-fixed').style.display = id==='splash' ? 'none' : '';
+  document.getElementById('app').classList.toggle('bg-blur', id==='results');
   const prev = document.getElementById(currentScreen);
   const next = document.getElementById(id);
   prev.classList.remove('active');
