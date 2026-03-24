@@ -214,12 +214,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   display:block;
 }
 
-.choice-btn-tst{
-  min-width:200px;max-width:300px;
-  margin:1rem auto 0;
-  padding:1.8rem 2rem;
-}
-
 /* Skin tone buttons */
 .tone-row{display:flex;flex-direction:column;gap:.8rem;width:100%}
 .tone-btn{
@@ -675,12 +669,12 @@ h2,p,span,button{color:#fff !important}
           <span class="label">CLASH</span>
           <span class="desc">COMBOS AUDACIEUX</span>
         </button>
+        <button class="choice-btn" onclick="setChoice('ton-sur-ton')">
+          <span class="icon">◈</span>
+          <span class="label">TON SUR TON</span>
+          <span class="desc">COMBOS SIGNATURES</span>
+        </button>
       </div>
-      <button class="choice-btn choice-btn-tst" onclick="setChoice('ton-sur-ton')">
-        <span class="icon">◈</span>
-        <span class="label">TON SUR TON</span>
-        <span class="desc">COMBO SIGNATURE</span>
-      </button>
     </div>
   </div>
 
