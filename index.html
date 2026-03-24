@@ -736,9 +736,10 @@ h2,p,span,button{color:#fff !important}
   </div>
 
   <!-- ═══ RESULTS ═══ -->
-  <div class="screen" id="results" style="padding-top:max(28vh,220px);">
+  <div class="screen" id="results" style="padding-top:2rem;">
     <button class="btn-back" onclick="goTo('q2')">←</button>
     <div class="results-header">
+      <img src="img/logo-lovenude.png" alt="LOVENUDE" style="width:34%;max-width:176px;margin:2rem auto 1.5rem;display:block;opacity:.95">
       <div class="results-badge" id="resultsBadge"></div>
       <h2 class="results-title" id="resultsTitle" style="display:none">Tes Combos</h2>
       <p class="results-sub" id="resultsSub"></p>
@@ -748,8 +749,9 @@ h2,p,span,button{color:#fff !important}
   </div>
 
   <!-- ═══ DETAIL OVERLAY ═══ -->
-  <div class="screen" id="detail" style="padding-top:max(28vh,200px);">
+  <div class="screen" id="detail" style="padding-top:2rem;">
     <button class="btn-back" onclick="closeDetail()">←</button>
+    <div style="text-align:center"><img src="img/logo-lovenude.png" alt="LOVENUDE" style="width:34%;max-width:176px;margin:2rem auto 1.5rem;display:inline-block;opacity:.95"></div>
     <div class="detail-content" id="detailContent"></div>
   </div>
 
@@ -838,6 +840,8 @@ function goTo(id) {
   } else {
     logo.classList.remove('hide');
   }
+  // Also show detail logo
+  if (id === 'detail') document.getElementById('detail').scrollTop = 0;
 }
 
 function setChoice(c) {
