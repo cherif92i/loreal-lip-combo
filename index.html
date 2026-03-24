@@ -969,7 +969,7 @@ function runShuffle() {
   const reel1 = document.getElementById('reel1');
   const reel2 = document.getElementById('reel2');
   reel1.innerHTML = buildReel(ALL_LIPS, combo.lip, 'lip');
-  reel2.innerHTML = buildReel(ALL_LINERS, combo.liner, 'liner');
+  reel2.innerHTML = '';
   reel1.style.transform = 'translateY(0)';
   reel2.style.transform = 'translateY(0)';
   
@@ -977,8 +977,10 @@ function runShuffle() {
   setTimeout(() => {
     animateReel(reel1, 21, 1800, () => {
       document.getElementById('slot1').classList.add('locked');
-      // Start reel 2 after a beat
+      // Build reel 2 then animate
       setTimeout(() => {
+        reel2.innerHTML = buildReel(ALL_LINERS, combo.liner, 'liner');
+        reel2.style.transform = 'translateY(0)';
         animateReel(reel2, 21, 1800, () => {
           document.getElementById('slot2').classList.add('locked');
           document.getElementById('shuffleFound').classList.add('show');
