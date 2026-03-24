@@ -38,7 +38,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ═══════════════ APP SHELL ═══════════════ */
 #app{position:relative;width:100%;height:100%;overflow:hidden}
-#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") 35% center/cover no-repeat;opacity:.55;z-index:-1;pointer-events:none}
+#app::after{content:"";position:fixed;inset:0;background:url("img/bg/visuel-lovenude.jpg") 35% center/cover no-repeat fixed;opacity:.55;z-index:-1;pointer-events:none}
 
 /* ═══════════════ SCREENS ═══════════════ */
 .screen{
@@ -159,7 +159,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:30px;left:50%;transform:translateX(-50%);width:34%;max-width:176px;z-index:200;opacity:.95;pointer-events:none}
+.logo-fixed{position:absolute;top:30px;left:50%;transform:translateX(-50%);width:34%;max-width:176px;z-index:200;opacity:.95;pointer-events:none}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -528,7 +528,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 ::-webkit-scrollbar{width:0;background:transparent}
 
 /* Dark overlay behind content for readability */
-.screen::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:1}
+.screen::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1;pointer-events:none}
 .screen>*{position:relative;z-index:2}
 .tone-btn,.choice-btn{background:rgba(196,134,122,.18) !important;backdrop-filter:blur(6px);justify-content:center}
 /* Force all text white */
