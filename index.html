@@ -176,10 +176,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 
 /* Match / Clash buttons */
-.choice-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.choice-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
 .choice-btn{
-  flex:1;min-width:120px;max-width:180px;
-  padding:1.8rem 1rem;
+  flex:1 1 0;min-width:0;max-width:160px;
+  padding:1.5rem .8rem;
+  aspect-ratio:1/1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   border:1px solid transparent;
   background:rgba(196,134,122,.06);
   backdrop-filter:blur(6px);
@@ -199,17 +201,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   transform:scale(1.03);
   box-shadow:0 0 40px rgba(196,134,122,.15);
 }
-.choice-btn .icon{font-size:2rem;margin-bottom:.8rem;display:block}
+.choice-btn .icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
 .choice-btn .label{
   font-family:'SingulierHeavy',sans-serif;
   font-weight:700;
-  font-size:1.8rem;
+  font-size:clamp(1rem,4vw,1.5rem);
   display:block;
   letter-spacing:.15em;
 }
 .choice-btn .desc{
-  font-size:.65rem;
-  letter-spacing:.15em;
+  font-size:.5rem;
+  letter-spacing:.12em;
   text-transform:uppercase;
   color:rgba(255,255,255,.5);
   margin-top:.5rem;
@@ -540,8 +542,10 @@ h2,p,span,button{color:#fff !important}
   .btn-start{padding:1.2rem 4rem;font-size:1rem}
   .q-title{font-size:clamp(2rem,5vw,3rem)}
   .q-content{max-width:550px}
-  .choice-btn{min-width:200px;max-width:240px;padding:3rem 1.5rem}
-  .choice-btn .label{font-size:2.2rem}
+  .choice-btn{max-width:200px;padding:0;aspect-ratio:1/1}
+  .choice-btn .label{font-size:1.8rem}
+  .choice-btn .icon{font-size:1.8rem}
+  .choice-btn .desc{font-size:.6rem}
   .tone-btn{padding:1.8rem 2.5rem}
   .tone-label{font-size:1.15rem}
   .tone-dot{width:44px;height:44px}
@@ -566,11 +570,11 @@ h2,p,span,button{color:#fff !important}
   /* Q screens */
   .q-title{font-size:clamp(2.2rem,4vw,3.2rem)}
   .q-label{font-size:.85rem}
-  .choice-row{gap:2rem}
-  .choice-btn{min-width:240px;max-width:300px;padding:3.5rem 2rem}
-  .choice-btn .label{font-size:2.8rem}
-  .choice-btn .desc{font-size:.8rem;letter-spacing:.2em}
-  .choice-btn .icon{font-size:2.5rem}
+  .choice-row{gap:1.5rem}
+  .choice-btn{max-width:220px;padding:0;aspect-ratio:1/1}
+  .choice-btn .label{font-size:2rem}
+  .choice-btn .desc{font-size:.7rem;letter-spacing:.2em}
+  .choice-btn .icon{font-size:2rem}
   .tone-row{max-width:600px;margin:0 auto;gap:1rem}
   .tone-btn{padding:2rem 3rem}
   .tone-label{font-size:1.3rem}
@@ -621,8 +625,8 @@ h2,p,span,button{color:#fff !important}
   .combos-grid{max-width:900px}
   .detail-content{max-width:800px}
   .shuffle-content{max-width:750px}
-  .choice-btn{min-width:280px;max-width:340px;padding:4rem 2rem}
-  .choice-btn .label{font-size:3.2rem}
+  .choice-btn{max-width:260px;aspect-ratio:1/1}
+  .choice-btn .label{font-size:2.4rem}
   .detail-product-img{width:250px;height:250px}
   .combo-swatch{width:80px;height:80px}
   .combo-product-name{font-size:1.3rem}
