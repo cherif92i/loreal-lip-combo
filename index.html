@@ -846,7 +846,7 @@ function showResults() {
         <div class="combo-label">Combo ${i+1}</div>
         <div class="combo-products">
           <div class="combo-product">
-            <img class="combo-swatch lip-swatch" src="img/lipstick/${c.lip.id}.jpg" alt="">
+            <img class="combo-swatch lip-swatch" src="img/packshot/lipstick-${c.lip.id}.jpg" onerror="this.src='img/lipstick/${c.lip.id}.jpg'" alt="">
             <div class="combo-product-info">
               <div class="combo-product-type">Lip Blusher</div>
               <div class="combo-product-name">#${c.lip.id} ${c.lip.name}</div>
@@ -881,9 +881,7 @@ function openDetail(idx) {
     <div class="detail-duo">
       <div class="detail-product">
         <div class="detail-product-type">Lip Blusher</div>
-        ${hasPackshot(combo.lip.id) 
-          ? `<img class="detail-product-img lip-img" src="img/packshot/lipstick-${combo.lip.id}.jpg" alt="">`
-          : `<img class="detail-product-img lip-img" src="img/lipstick/${combo.lip.id}.jpg" alt="">`}
+        <img class="detail-product-img lip-img" src="img/packshot/lipstick-${combo.lip.id}.jpg" onerror="this.src='img/lipstick/${combo.lip.id}.jpg'" alt="">
         <div class="detail-product-shade">#${combo.lip.id}</div>
         <div class="detail-product-desc">${combo.lip.name}</div>
       </div>
@@ -936,11 +934,12 @@ function buildReel(items, finalItem, type) {
   const shuffled = [];
   for(let i=0;i<20;i++) shuffled.push(items[Math.floor(Math.random()*items.length)]);
   shuffled.push(finalItem);
-  const imgDir = type==='lip'?'lipstick':'liner';
   const cls = type==='lip'?' lip-reel':'';
-  return shuffled.map(it => 
-    `<div class="shuffle-slot-item"><img class="${cls}" src="img/${imgDir}/${it.id}.jpg" alt=""><span>#${it.id} ${it.name}</span></div>`
-  ).join('');
+  return shuffled.map(it => {
+    const src = type==='lip' ? `img/packshot/lipstick-${it.id}.jpg` : `img/liner/${it.id}.jpg`;
+    const fallback = type==='lip' ? ` onerror="this.src='img/lipstick/${it.id}.jpg'"` : '';
+    return `<div class="shuffle-slot-item"><img class="${cls}" src="${src}"${fallback} alt=""><span>#${it.id} ${it.name}</span></div>`;
+  }).join('');
 }
 
 function animateReel(reelEl, totalItems, duration, cb) {
