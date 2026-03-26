@@ -43,6 +43,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1);
   transform:translateY(20px);
   will-change:opacity,transform;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
 }
 .screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
 .screen.exit{opacity:0;transform:translateY(-20px);pointer-events:none}
@@ -135,9 +136,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 50% 100%,rgba(196,134,122,.12) 0%,transparent 70%);
 }
-.q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px}
+.q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px;padding:1rem 0}
 
-.q-logo{width:48px;margin:0 auto 2.5rem;opacity:.7}
+.q-logo{width:48px;margin:0 auto 1.5rem;opacity:.7}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
@@ -214,6 +215,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tone-dot.fonce{background:linear-gradient(135deg,#7B5B4C,#5C3D2E)}
 .tone-label{
   font-size:1rem;letter-spacing:.2em;text-transform:uppercase;
+}
+
+/* ═══════════════ SMALL SCREEN FIX ═══════════════ */
+@media (max-height:740px){
+  .screen{justify-content:flex-start;padding-top:2rem}
+  .q-logo{width:36px;margin-bottom:1rem}
+  .q-title{font-size:clamp(1.6rem,6vw,2.5rem);margin-bottom:1.5rem}
+  .q-content{padding:.5rem 0}
+  .tone-btn{padding:1rem 1.5rem}
+  .choice-btn{padding:1.8rem .8rem}
+  #splash{justify-content:center}
+}
+@media (max-height:600px){
+  .screen{padding-top:1rem}
+  .q-logo{width:30px;margin-bottom:.6rem}
+  .q-title{margin-bottom:1rem}
+  .tone-btn{padding:.8rem 1.2rem}
+  .tone-dot{width:28px;height:28px}
 }
 
 /* ═══════════════ RESULTS SCREEN ═══════════════ */
