@@ -157,7 +157,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .q-screen{
   background:transparent;
   padding:2rem;
-  padding-top:250px;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
@@ -169,7 +168,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:160px;z-index:200;opacity:.95;pointer-events:none}
+.logo-fixed{display:none}
+.q-screen-logo{width:clamp(100px,30vw,160px);margin:0 auto 1.5rem;opacity:.95;display:block;flex-shrink:0}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -673,6 +673,7 @@ h2,p,span,button{color:#fff !important}
   <!-- ═══ Q1: MATCH ou CLASH ═══ -->
   <div class="screen" id="q1">
     <button class="btn-back" onclick="goTo('splash')">←</button>
+    <img src="img/logo-lovenude.png" alt="LOVENUDE" class="q-screen-logo">
     <div class="q-content">
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">MATCH OU CLASH ?</h2>
@@ -694,6 +695,7 @@ h2,p,span,button{color:#fff !important}
   <!-- ═══ Q2: SKIN TONE ═══ -->
   <div class="screen" id="q2">
     <button class="btn-back" onclick="goTo('q1')">←</button>
+    <img src="img/logo-lovenude.png" alt="LOVENUDE" class="q-screen-logo">
     <div class="q-content">
       <p class="q-label">Étape 2</p>
       <h2 class="q-title">Ta Carnation</h2>
@@ -816,11 +818,10 @@ const COMBOS = {
 const TONE_LABELS = { clair:'Clair', medium:'Medium', fonce:'Foncé' };
 
 let choice = '', tone = '', currentScreen = 'splash';
-document.querySelector('.logo-fixed').style.display = 'none';
+// logo-fixed disabled, using in-flow logos now
 
 // ═══════════════ NAVIGATION ═══════════════
 function goTo(id) {
-  document.querySelector('.logo-fixed').style.display = id==='splash' ? 'none' : '';
   document.getElementById('app').classList.toggle('bg-blur', id==='results');
   const prev = document.getElementById(currentScreen);
   const next = document.getElementById(id);
