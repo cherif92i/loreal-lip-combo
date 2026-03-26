@@ -131,6 +131,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .q-screen{
   background:var(--black);
   padding:2rem;
+  padding-top:calc(48px + 4rem);
 }
 .q-screen::before{
   content:'';position:absolute;inset:0;
@@ -138,7 +139,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .q-content{position:relative;z-index:2;text-align:center;width:100%;max-width:400px;padding:1rem 0}
 
-.q-logo{width:48px;margin:0 auto 1.5rem;opacity:.7}
+.q-logo{width:48px;opacity:.7;position:absolute;top:2rem;left:50%;transform:translateX(-50%);z-index:3}
+.q-screen{padding-top:calc(48px + 4rem)}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:var(--rose);margin-bottom:.8rem;
@@ -429,8 +431,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   <!-- ═══ Q1: MATCH ou CLASH ═══ -->
   <div class="screen q-screen" id="q1">
+    <img src="img/logo-white.png" alt="YSL" class="q-logo">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
       <p class="q-label">Étape 1</p>
       <h2 class="q-title">Match ou Clash ?</h2>
       <div class="choice-row">
@@ -450,8 +452,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   <!-- ═══ Q2: SKIN TONE ═══ -->
   <div class="screen q-screen" id="q2">
+    <img src="img/logo-white.png" alt="YSL" class="q-logo">
     <div class="q-content">
-      <img src="img/logo-white.png" alt="YSL" class="q-logo">
       <p class="q-label">Étape 2</p>
       <h2 class="q-title">Carnation</h2>
       <div class="tone-row">
