@@ -820,7 +820,9 @@ document.querySelector('.logo-fixed').style.display = 'none';
 
 // ═══════════════ NAVIGATION ═══════════════
 function goTo(id) {
-  document.querySelector('.logo-fixed').style.display = id==='splash' ? 'none' : '';
+  var logoEl = document.querySelector('.logo-fixed');
+  logoEl.style.display = id==='splash' ? 'none' : '';
+  logoEl.style.opacity = '0.95';
   document.getElementById('app').classList.toggle('bg-blur', id==='results');
   const prev = document.getElementById(currentScreen);
   const next = document.getElementById(id);
