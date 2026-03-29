@@ -169,7 +169,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .q-logo{width:120px;margin:0 auto .5rem;opacity:.7}
 .logo-main{width:90%;max-width:450px;margin:0 auto 1.5rem;display:block;opacity:.95}
-.logo-fixed{position:fixed;top:8px;left:50%;transform:translateX(-50%);width:clamp(120px, 18vw, 260px);z-index:200;opacity:.95;pointer-events:none}
+.logo-fixed{position:fixed;top:8px;left:50%;transform:translateX(-50%);width:clamp(120px, 18vw, 260px);z-index:200;opacity:.95;pointer-events:none;transition:opacity .3s ease}
 .q-label{
   font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;
   color:#fff;margin-bottom:.8rem;
@@ -832,6 +832,20 @@ function goTo(id) {
   if (id === 'results') next.scrollTop = 0;
   if (id === 'detail') document.getElementById('detail').scrollTop = 0;
 }
+
+// Fade logo on scroll
+['results','detail'].forEach(function(sid){
+  var el = document.getElementById(sid);
+  if(el) el.addEventListener('scroll', function(){
+    var logo = document.querySelector('.logo-fixed');
+    if(!logo) return;
+    var s = el.scrollTop;
+    var fadeStart = 30, fadeEnd = 150;
+    if(s <= fadeStart) logo.style.opacity = '0.95';
+    else if(s >= fadeEnd) logo.style.opacity = '0';
+    else logo.style.opacity = String(0.95 * (1 - (s - fadeStart) / (fadeEnd - fadeStart)));
+  });
+});
 
 function setChoice(c) {
   choice = c;
