@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @font-face { font-family: 'SingulierHeavy'; src: url('fonts/Singulier-Heavy.otf') format('opentype'); }
+  @font-face { font-family: 'Singulier'; src: url('fonts/Singulier-Bold.otf') format('opentype'); font-weight: 700; }
+  @font-face { font-family: 'Singulier'; src: url('fonts/Singulier-Regular.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'Singulier'; src: url('fonts/Singulier-Light.otf') format('opentype'); font-weight: 300; }
+  body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; flex-direction: column; gap: 40px; }
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 60px 80px;
+  }
+  .logo-ysl-img {
+    width: 90px;
+    margin-bottom: 12px;
+  }
+  .logo-beaute {
+    font-family: 'Singulier', serif;
+    font-weight: 300;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .logo-lovenude {
+    font-family: 'SingulierHeavy', sans-serif;
+    color: #fff;
+    font-size: 38px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .logo-matchmaker {
+    font-family: 'Singulier', serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .logo-subtitle {
+    font-family: 'Singulier', serif;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 4px 0;
+  }
+  canvas { border: 1px solid #333; margin-top: 20px; }
+  button { padding: 12px 24px; font-size: 16px; cursor: pointer; background: #c9a84c; border: none; color: #000; font-weight: bold; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Preview HTML -->
+<div class="logo-container" id="logoPreview">
+  <img src="img/logo-white.png" class="logo-ysl-img" onerror="this.src='img/logo-lovenude-v2.png'" />
+  <div class="logo-beaute">Beauté</div>
+  <div class="logo-lovenude">LOVENUDE</div>
+  <div class="logo-matchmaker">Matchmaker</div>
+  <div class="logo-subtitle">Créateur de combos lèvres</div>
+</div>
+
+<!-- Canvas render for PNG export -->
+<canvas id="c" width="800" height="900"></canvas>
+<button onclick="renderAndDownload()">📥 Télécharger PNG</button>
+
+<script>
+const img = new Image();
+img.crossOrigin = 'anonymous';
+img.src = 'img/logo-lovenude-v2.png';
+
+img.onload = () => renderAndDownload(false);
+
+function renderAndDownload(download = true) {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+
+  // Clear transparent
+  ctx.clearRect(0, 0, c.width, c.height);
+
+  // Draw YSL logo
+  const logoW = 140;
+  const logoH = (img.height / img.width) * logoW;
+  // Only draw the YSL monogram part (top ~65% of the image)
+  const cropH = img.height * 0.65;
+  ctx.drawImage(img, 0, 0, img.width, cropH, (c.width - logoW) / 2, 40, logoW, logoH * 0.65);
+
+  let y = 40 + logoH * 0.65 + 10;
+
+  // BEAUTÉ
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '300 24px Singulier, Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '8px';
+  ctx.fillText('B E A U T É', c.width / 2, y);
+
+  y += 50;
+
+  // LOVENUDE
+  ctx.font = '44px SingulierHeavy, sans-serif';
+  ctx.letterSpacing = '6px';
+  ctx.fillText('L O V E N U D E', c.width / 2, y);
+
+  y += 45;
+
+  // MATCHMAKER
+  ctx.font = '400 20px Singulier, Georgia, serif';
+  ctx.letterSpacing = '10px';
+  ctx.fillText('M A T C H M A K E R', c.width / 2, y);
+
+  y += 40;
+
+  // Créateur de combos lèvres
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = '300 16px Singulier, Georgia, serif';
+  ctx.letterSpacing = '4px';
+  ctx.fillText('C R É A T E U R  D E  C O M B O S  L È V R E S', c.width / 2, y);
+
+  if (download) {
+    const link = document.createElement('a');
+    link.download = 'logo-lovenude-v3.png';
+    link.href = c.toDataURL('image/png');
+    link.click();
+  }
+}
+</script>
+</body>
+</html>
